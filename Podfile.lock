@@ -1,0 +1,131 @@
+PODS:
+  - Alamofire (4.0.1)
+  - IBAnimatable (3.0.1)
+  - IQKeyboardManagerSwift (4.0.6)
+  - Kingfisher (3.1.4)
+  - MBProgressHUD (1.0.0)
+  - MJRefresh (3.1.12)
+  - MOBFoundation (2.2.10)
+  - RxCocoa (3.0.0):
+    - RxSwift (~> 3.0)
+  - RxSwift (3.0.0)
+  - ShareSDK3 (3.5.0):
+    - ShareSDK3/ShareSDK (= 3.5.0)
+  - ShareSDK3/ShareSDK (3.5.0)
+  - ShareSDK3/ShareSDKPlatforms/Copy (3.5.0)
+  - ShareSDK3/ShareSDKPlatforms/QQ (3.5.0)
+  - ShareSDK3/ShareSDKPlatforms/WeChat (3.5.0)
+  - SnapKit (3.0.2)
+  - SwiftDate (4.0.7)
+  - SwiftyJSON (3.1.0)
+  - UMengAnalytics (4.1.0)
+
+DEPENDENCIES:
+  - Alamofire (from `https://github.com/ricebook/Alamofire.git`, commit `6d2f0a9`, branch `serious`)
+  - IBAnimatable (from `https://github.com/IBAnimatable/IBAnimatable.git`, tag `3.0.1`)
+  - IQKeyboardManagerSwift (from `https://github.com/hackiftekhar/IQKeyboardManager.git`, tag `v4.0.7`)
+  - Kingfisher (from `https://github.com/onevcat/Kingfisher.git`, tag `3.1.4`)
+  - MBProgressHUD
+  - MJRefresh
+  - MOBFoundation (from `https://github.com/ShareSDKPlatform/MOBFoundation.git`, tag `2.2.10`)
+  - RxCocoa (from `https://github.com/ReactiveX/RxSwift.git`, tag `3.0.0`)
+  - RxSwift (from `https://github.com/ReactiveX/RxSwift.git`, tag `3.0.0`)
+  - ShareSDK3 (from `https://github.com/ShareSDKPlatform/ShareSDK.git`, tag `3.5.0`)
+  - ShareSDK3/ShareSDKPlatforms/Copy (from `https://github.com/ShareSDKPlatform/ShareSDK.git`, tag `3.5.0`)
+  - ShareSDK3/ShareSDKPlatforms/QQ (from `https://github.com/ShareSDKPlatform/ShareSDK.git`, tag `3.5.0`)
+  - ShareSDK3/ShareSDKPlatforms/WeChat (from `https://github.com/ShareSDKPlatform/ShareSDK.git`, tag `3.5.0`)
+  - SnapKit (from `https://github.com/SnapKit/SnapKit.git`, tag `3.1.1`)
+  - SwiftDate (from `https://github.com/malcommac/SwiftDate.git`, tag `4.0.7`)
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, tag `v3.1.1`)
+  - UMengAnalytics
+
+EXTERNAL SOURCES:
+  Alamofire:
+    :branch: serious
+    :commit: 6d2f0a9
+    :git: https://github.com/ricebook/Alamofire.git
+  IBAnimatable:
+    :git: https://github.com/IBAnimatable/IBAnimatable.git
+    :tag: 3.0.1
+  IQKeyboardManagerSwift:
+    :git: https://github.com/hackiftekhar/IQKeyboardManager.git
+    :tag: v4.0.7
+  Kingfisher:
+    :git: https://github.com/onevcat/Kingfisher.git
+    :tag: 3.1.4
+  MOBFoundation:
+    :git: https://github.com/ShareSDKPlatform/MOBFoundation.git
+    :tag: 2.2.10
+  RxCocoa:
+    :git: https://github.com/ReactiveX/RxSwift.git
+    :tag: 3.0.0
+  RxSwift:
+    :git: https://github.com/ReactiveX/RxSwift.git
+    :tag: 3.0.0
+  ShareSDK3:
+    :git: https://github.com/ShareSDKPlatform/ShareSDK.git
+    :tag: 3.5.0
+  SnapKit:
+    :git: https://github.com/SnapKit/SnapKit.git
+    :tag: 3.1.1
+  SwiftDate:
+    :git: https://github.com/malcommac/SwiftDate.git
+    :tag: 4.0.7
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+    :tag: v3.1.1
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: 6d2f0a99c32a87c3170cabbf504600cd2bc2ada2
+    :git: https://github.com/ricebook/Alamofire.git
+  IBAnimatable:
+    :git: https://github.com/IBAnimatable/IBAnimatable.git
+    :tag: 3.0.1
+  IQKeyboardManagerSwift:
+    :git: https://github.com/hackiftekhar/IQKeyboardManager.git
+    :tag: v4.0.7
+  Kingfisher:
+    :git: https://github.com/onevcat/Kingfisher.git
+    :tag: 3.1.4
+  MOBFoundation:
+    :git: https://github.com/ShareSDKPlatform/MOBFoundation.git
+    :tag: 2.2.10
+  RxCocoa:
+    :git: https://github.com/ReactiveX/RxSwift.git
+    :tag: 3.0.0
+  RxSwift:
+    :git: https://github.com/ReactiveX/RxSwift.git
+    :tag: 3.0.0
+  ShareSDK3:
+    :git: https://github.com/ShareSDKPlatform/ShareSDK.git
+    :tag: 3.5.0
+  SnapKit:
+    :git: https://github.com/SnapKit/SnapKit.git
+    :tag: 3.1.1
+  SwiftDate:
+    :git: https://github.com/malcommac/SwiftDate.git
+    :tag: 4.0.7
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+    :tag: v3.1.1
+
+SPEC CHECKSUMS:
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  IBAnimatable: 709f04a2b951c55db9ac4d8893684830bbdd0be2
+  IQKeyboardManagerSwift: b3015e819559ca76381f87a0833f44d178564603
+  Kingfisher: 6c67e3e57f2d81a9cfdfa25052cd86f33ceac9bb
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  MOBFoundation: 3cca6f267be8ea7643be0d27ec871b66b64e32fd
+  RxCocoa: eb3f8b6ded51036148f05ec223e22c893f4421b1
+  RxSwift: 931443655decc4aec2ff4e4197bf1720c2d49c57
+  ShareSDK3: 2bcdbba886604cf82a2df6c306c4ecff99aceacf
+  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
+  SwiftDate: 84b6ddfd6858061dfeedd2d38f79a3130bfa1028
+  SwiftyJSON: c3f3eca60f74beabce1d0aacf909a927ef7822b4
+  UMengAnalytics: 19b28253793d77dff10fb7d502faad1fb6b8ce4a
+
+PODFILE CHECKSUM: 5dfb42b896684adde8025b51ccc708cfb8894ad1
+
+COCOAPODS: 1.1.1
