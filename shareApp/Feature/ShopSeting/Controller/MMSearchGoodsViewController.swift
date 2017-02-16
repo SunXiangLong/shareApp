@@ -112,14 +112,14 @@ class MMSearchGoodsViewController: MMBaseCollectionViewController {
                     
                     return
                 }
-                log(modelArr)
-                log(self.viewModel.isSearch.value)
+                log(modelArr.count)
+                
                 
                 if  modelArr.count == 0{
                     self.tabeleView.removeFromSuperview()
                     if self.viewModel.isSearch.value {
+
                         self.show("搜索不到该商品", delay: 1)
-                        
                     }
                 }else{
                     
@@ -134,12 +134,16 @@ class MMSearchGoodsViewController: MMBaseCollectionViewController {
                     UserDefaults.standard.set(self.searchHistoryArray, forKey: "searchHistory")
                     UserDefaults.standard.synchronize()
                 }
+                
                 self.viewModel.isSearch.value = false
+                 
+             
             })
             .addDisposableTo(disposeBag)
         
         switch type! {
         case .ordinaryGoods:
+            
             results
                 .drive(tabeleView.rx.items(cellIdentifier: "MMGoodsTableViewCell")) {[unowned self] (index, repository, cell) in
                     let cell = cell as! MMGoodsTableViewCell
@@ -395,7 +399,12 @@ class MMSearchGoodsViewController: MMBaseCollectionViewController {
             
         case 1:
             searchTextField.text = dataArray[indexPath.section][indexPath.row] as? String
-            self.searchTextField.resignFirstResponder()
+            if self.searchTextField.becomeFirstResponder() {
+                self.searchTextField.resignFirstResponder()
+            }else{
+                self.searchTextField.becomeFirstResponder()
+                
+            }
         default:break
         }
     }
@@ -411,7 +420,6 @@ extension MMSearchGoodsViewController : UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         self.viewModel.isSearch.value = true
-        //        self.searchTextField.text = textField.text;
         self.searchTextField.resignFirstResponder()
         return false
     }

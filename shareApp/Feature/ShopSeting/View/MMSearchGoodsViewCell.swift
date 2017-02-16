@@ -27,11 +27,13 @@ struct ViewModel {
     func getRepositories(_ githubId:String) -> Observable<[MMGoodsModel]> {
        
         return Observable.create{  observer in
-            log(self.isSearch.value)
+           
             if !self.isSearch.value {
             
                 return Disposables.create()
             }
+            log(self.isSearch.value)
+            self.isSearch.value = false;
             
             var isVip = "1"
             if self.type! == .ordinaryGoods{
@@ -41,7 +43,8 @@ struct ViewModel {
             }
             
             HTTPTool.Post(API.searchGoods, parameters: ["token":MMUserInfo.UserInfo.token!,"keywords":githubId,"is_vip":isVip]) { (model, error) in
-                log(model?.data?.count)
+                
+                 self.isSearch.value = true
                 if model != nil&&model!.data!["lists"] != nil&&model!.data!["lists"].count > 0 {
                     
                     let data  = (model?.data?["lists"].array!.map{
@@ -50,10 +53,12 @@ struct ViewModel {
                     
                     observer.onNext(data)
                     
+                }else{
+                observer.onNext([])
                 }
                 
             }
-        return Disposables.create()
+            return Disposables.create()
         }
     }
 }
