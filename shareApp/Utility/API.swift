@@ -13,7 +13,7 @@ public struct API {
     /// 线上地址
  fileprivate    static let URL = "https://vapi.xiaomabao.com/"
      /// 测试地址
-// fileprivate static let URL = "http://192.168.10.202/"
+// fileprivate static let URL = "http://192.168.11.153/"
 
 /******************************用户搜索商品**************************************/
     //判断是否需要更新推荐搜索关键字
@@ -77,6 +77,7 @@ public struct API {
 //    static let goodsCategoryList2 = API.URL+"goods/category_list_v2"
     ///商品分类
     static let goodsGoodsList = API.URL+"goods/goods_list"
+     static let goodsGoodsList2 = API.URL+"goods/goods_list_v2"
     ///商品列表(VIP)
     static let goodsVipGoodsList = API.URL+"goods/vip_goods_list"
     ///商品列表（我的店铺）
@@ -84,7 +85,7 @@ public struct API {
     ///商品上架
     static let goodsOnSale = API.URL+"goods/on_sale"
     /// brand列表
-    static let brandBrandList = API.URL+"brand/brand_list"
+//    static let brandBrandList = API.URL+"brand/brand_list"
     static let brandBrandList2 = API.URL+"brand/brand_list_v2"
     /// brand下的商品列表
     static let brandGoodList = API.URL+"brand/goods_list"
@@ -119,6 +120,10 @@ public struct API {
    
     //麻包使用协议
     static let commonBean = API.URL+"common/bean_agreement"
+    
+    
+     static let cartUrl = "http://weidian.xiaomabao.com/"+"cart/"
+
    
 }
 

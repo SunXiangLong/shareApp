@@ -120,22 +120,15 @@ class MMSetUpTableViewController: MMBaseTableViewController {
             }
             break
         case 1:
-            
             // 退出登录时，清空本地存储的用户信息 UUID  搜索历史  网页cookie
             MMUserInfo.UserInfo.clearUserInfo()
             UserDefaults.standard.removeObject(forKey: "userinfo")
             UserDefaults.standard.removeObject(forKey: "UUID")
             UserDefaults.standard.removeObject(forKey: "source")
             deleteCookie()
+            log(MMUserInfo.UserInfo.token)
             
-            let vc = self.navigationController?.viewControllers.first as!MMPersonalCenterViewController
-            if vc.type != nil   {
-                vc.dismiss(animated: true, completion: nil)
-            }else{
-                let nav = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginNavigationController") as!MMNavigationController
-                let window =   UIApplication.shared.delegate?.window
-                window!!.rootViewController = nav
-            }
+            _ = self.toLogIn()
             break
         default:
             break

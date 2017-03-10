@@ -31,9 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,WXApiDelegate{
 //        appirater()
         ///判断根视图
         refreshTokenRootVC()
-       ///热修复注册
-//        jsPatchRegistered()
-        
         if let notification = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [String: AnyObject] {
             // 2
             let aps = notification["aps"] as! [String: AnyObject]
@@ -82,26 +79,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,WXApiDelegate{
     //MARK: ----极光推送相关根据token是否过期 判断根视图为登录还是主界面
     func refreshTokenRootVC() -> Void {
         let userinfoDic =   UserDefaults.standard.value(forKey: "userinfo")
+        log(userinfoDic)
+        
         if userinfoDic != nil{
             let json =   JSON.init( userinfoDic as![String:AnyObject])
             let token = json["token"].string
-            self.token(token!, block: {[unowned self]  (bool) in
-                if  bool{
-                    let nav = UIStoryboard(name: "ShopSeting", bundle: nil).instantiateViewController(withIdentifier: "ShopSetingNavigationController") as!MMNavigationController
-                    self.window?.rootViewController = nav
+            self.token(token!, block: { (isToken) in
+                if isToken{
                     let model = MMBaseModel.init(json: json)
                     model.data = json
                     MMUserInfo.UserInfo.initUserInfo(model)
-                }else{
-                    let nav = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginNavigationController") as!MMNavigationController
-                    self.window?.rootViewController = nav
+                
                 }
-                })
+                let TabBar = UIStoryboard(name: "ShopSeting", bundle: nil).instantiateViewController(withIdentifier: "TabBar") as!UITabBarController
+                self.window?.rootViewController = TabBar
+            })
+
+
         }else{
-            
-            let nav = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginNavigationController") as!MMNavigationController
-            self.window?.rootViewController = nav
-            
+            let TabBar = UIStoryboard(name: "ShopSeting", bundle: nil).instantiateViewController(withIdentifier: "TabBar") as!UITabBarController
+            self.window?.rootViewController = TabBar
         }
     }
     func token(_ token:String,block:(Bool)->Void) -> Void {
@@ -126,18 +123,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,WXApiDelegate{
         }
         
     }
-//    //MARK:--热修复JSPatch
-//    func jsPatchRegistered() -> Void {
-//        JSPatch.start(withAppKey: "dc0cc8127159ec45")
-//        JSPatch.setupCallback { (type, data, error) in
-//            
-//        }
-//        #if DEBUG
-//            JSPatch.setupDevelopment()
-//        #endif
-//        JSPatch.sync()
-//        
-//    }
     /// shareSDK初始化
       func shareSDK() -> Void {
         

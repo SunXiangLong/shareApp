@@ -174,7 +174,7 @@ public func UUID() ->String{
 //    Appirater.setUsesUntilPrompt(10)
 //    Appirater.setSignificantEventsUntilPrompt(-1)
 //    Appirater.setTimeBeforeReminding(2)
-//    Appirater.setDebug(false)
+//    Appirater.setDebug(true)
 //    Appirater.appLaunched(true)
 //}
 

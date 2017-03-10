@@ -41,26 +41,29 @@ class MMTabPageViewController: TabPageViewController,UIPopoverPresentationContro
     }()
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         self.navigationController?.navigationBar.isTranslucent = false
+//        self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.navigationBar.addSubview(keepView)
         
-         UIApplication.shared.keyWindow?.addSubview(shareButton)
-        shareButton.snp.makeConstraints { (make) in
-            make.right.equalTo(-10)
-            make.bottom.equalTo(-100)
-        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        
         keepView.removeFromSuperview()
-        shareButton.removeFromSuperview()
+//        shareButton.removeFromSuperview()
+//        self.navigationController?.isNavigationBarHidden = false
     }
     override func viewDidLoad() {
-        super.viewDidLoad()
+//
         
-        
+        let backBtn = UIButton.init(type: .custom)
+        backBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44);
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: backBtn)
+//        self.navigationController?.navigationBar.backItem?.hidesBackButton  = true
+        self.view.backgroundColor = UIColor.white;
+         requestDta(false);
         
         self.searchTextField.frame = CGRect(x: 60, y: 7, width: screenW - 120, height: 30)
         self.childView = {[unowned self]  (page) in
@@ -73,10 +76,68 @@ class MMTabPageViewController: TabPageViewController,UIPopoverPresentationContro
             self.searchTextField.resignFirstResponder()
             self.searchTextField.text = self.keywordArray![page]
         }
+        
+      
+    }
+    /// 获取商品类目列表
+    var categoryModel:[MMGoodsCategoryModel]? = []
+    func requestDta(_ isVip:Bool){
+        categoryModel?.removeAll()
+        var parameters = [String:String]()
+        let  url = API.goodsCategoryList
+        if let token = MMUserInfo.UserInfo.token{
+            parameters = ["token":token]
+           
+        }
+        HTTPTool.Post(url, parameters:parameters ) { (model, error) in
+            if model != nil{
+//                log(model?.data)
+                self.categoryModel = model?.data?.array!.map{
+                    MMGoodsCategoryModel.init(json: $0)
+                }
+              
+//                    let controller = segue.destination as! MMTabPageViewController
+                    self.isInfinity = false
+                    for categoryModel in self.categoryModel! {
+                        let vc = UIStoryboard(name: "ShopSeting", bundle: nil).instantiateViewController(withIdentifier: "MMChooseGoodsShelvesTableViewController") as!MMChooseGoodsShelvesTableViewController
+                        vc.categoryModel = categoryModel
+                        vc.cateID =  categoryModel.cat_id
+                        if  categoryModel.type != nil && categoryModel.type == "brand" {
+                            vc.type = tableViewCellType.brand
+                        }else{
+                            vc.type = tableViewCellType.category
+                        }
+                        self.tabItems.append((vc,categoryModel.cat_name))
+                        self.sortArray?.append(("默认排序","default"))
+                        self.keywordArray?.append("")
+                    }
+                    var option = TabPageOption()
+                    option.currentColor = "ffffff".color
+                    option.defaultColor = "f6b0ac".color
+                    option.tabHeight = 39
+                    self.option = option
+                super.viewWillAppear(true)
+                super.viewWillDisappear(true)
+                super.viewDidLoad()
+                self.view.addSubview(self.shareButton)
+                self.shareButton.snp.makeConstraints { (make) in
+                    make.right.equalTo(-10)
+                    make.bottom.equalTo(-100)
+                }
+//                    self.performSegue(withIdentifier: "MMTabPageViewController", sender: nil)
+                
+                
+            }
+        }
     }
     
-    
     @IBAction func share(_ sender: AnyObject) {
+        
+        if !self.toLogIn(){
+            
+            return;
+        }
+        
         if MMUserInfo.UserInfo.shop_share_normal_url == nil{
             self.show("请退出重新登录！", delay: 1);
             return;
@@ -84,6 +145,7 @@ class MMTabPageViewController: TabPageViewController,UIPopoverPresentationContro
         share()
     }
     func share() {
+        
         
         ///分享视图
         self.shareView.frame = CGRect(x: 0, y: 0, width: screenW, height: screenH)
@@ -201,7 +263,10 @@ class MMTabPageViewController: TabPageViewController,UIPopoverPresentationContro
         return .none
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool{
-        self.performSegue(withIdentifier: "MMSearchGoodsViewController", sender: nil)
+        if self.toLogIn(){
+            self.performSegue(withIdentifier: "MMSearchGoodsViewController", sender: nil)
+        }
+        
         return false
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{

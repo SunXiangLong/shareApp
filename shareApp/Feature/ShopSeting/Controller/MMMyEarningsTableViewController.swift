@@ -46,7 +46,7 @@ class MMMyEarningsTableViewController: MMBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "我的收益"
-        
+//        self.rightStr = "绑卡"
         self.withdrawalButton.frame = CGRect(x: 0, y: screenH - 50-64, width: screenW, height: 50);
         self.view.addSubview(self.withdrawalButton)
       
@@ -55,6 +55,7 @@ class MMMyEarningsTableViewController: MMBaseTableViewController {
     @IBAction func back(_ sender: AnyObject) {
         self.popViewController(animated: true)
     }
+    
     @IBAction func withdrawalAmountLabel(_ sender: AnyObject) {
         if  MMUserInfo.UserInfo.card_bind_status!{
             
@@ -64,7 +65,22 @@ class MMMyEarningsTableViewController: MMBaseTableViewController {
         
         }
     }
+//    override func rightBtnSelector() ->Void{
+//        self.performSegue(withIdentifier: "MMBindBanKCardViewController", sender: true)
+//    }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "MMBindBanKCardViewController"{
+//        
+//            if let _ = sender{
+//            let vc = segue.destination as!MMBindBanKCardViewController
+//                vc.isBack = true;
+//            }
+//        
+//        }
+//        
+//    
+//    }
     /**请求我的收益*/
     override func requestDta() ->Void{
         
@@ -133,6 +149,8 @@ class MMMyEarningsTableViewController: MMBaseTableViewController {
             cell.versionLabel.text = ""
             break
         default:
+            cell.accessoryType = .disclosureIndicator
+            cell.versionLabel.text = ""
             break
         }
      

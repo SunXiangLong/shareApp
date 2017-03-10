@@ -41,9 +41,7 @@ class MMMyShopTableViewController: MMBaseTableViewController {
     }()
 
     @IBOutlet weak var top: NSLayoutConstraint!
-   
-    
-//    var page = 1
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

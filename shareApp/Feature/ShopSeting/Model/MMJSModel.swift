@@ -13,7 +13,10 @@ import JavaScriptCore
     /// JS方法返回支付参数
     ///
     /// - parameter payParameter: 支付参数
-    func call_pay(_ payParameter: [String: AnyObject])
+    func call_pay(_ payParameter: [String: String])
+    func switchTab()
+    func showMessage(_ message:String)
+    func openWebView(_ parameter:[String: String])
 }
 @objc class MMJSModel: NSObject,SwiftJavaScriptDelegate {
    
@@ -22,12 +25,28 @@ import JavaScriptCore
     weak var jsContext:JSContext?
     
     var event:((_ order_sn:String) ->Void)?
-    
-    func call_pay(_ payParameter: [String: AnyObject]) -> Void {
-        let order_price = String(Int(Double(payParameter["order_amount"]! as! String)!*100));
+    var switchtab:(() ->Void)?
+    var showmessage:((_ message:String) ->Void)?
+    var openWebview:((_ url:String,_ title:String) ->Void)?
+    func switchTab() {
+        self.switchtab!()
+    }
+    func showMessage(_ message: String) {
         
-        PayTool.wxPay(["orderName":payParameter["subject"]! as! String,"orderPrice":order_price,"order_sn":payParameter["order_sn"]! as! String],payType: .payGoods)
-        self.event!(payParameter["order_sn"]! as! String)
+        self.showmessage!(message)
+    }
+    func openWebView(_ parameter:[String: String]) {
+        log(parameter)
+        self.openWebview!(parameter["url"]!,parameter["title"]!)
+    }
+    func call_pay(_ payParameter: [String: String]) -> Void {
+        
+        let order_price = String(Int(Double(payParameter["order_amount"]!)!*100));
         log(payParameter)
+         self.event!(payParameter["order_sn"]!)
+    
+        PayTool.wxPay(["orderName":payParameter["subject"]!,"orderPrice":order_price,"order_sn":payParameter["order_sn"]!],payType: .payGoods)
+       
+        
     }
 }

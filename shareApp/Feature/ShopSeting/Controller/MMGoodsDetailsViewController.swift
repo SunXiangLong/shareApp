@@ -9,13 +9,14 @@
 import UIKit
 import JavaScriptCore
 import WebKit
-class MMGoodsDetailsViewController: MMBaseViewController,UIWebViewDelegate{
+import KYNavigationProgress
+class MMGoodsDetailsViewController: MMBaseViewController{
     var web:UIWebView?
     var url:URL?
     var isMyShop = false
     var type:LoadingWebviewType?
     var  brandModel:MMBrandModel?
-    var order_sn:String?
+    
     lazy var shareImageVIew:UIImageView = {
         return UIImageView()
     }()
@@ -28,6 +29,12 @@ class MMGoodsDetailsViewController: MMBaseViewController,UIWebViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let  backBtn = UIButton.init(type: .custom)
+        backBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 44);
+        backBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0)
+        backBtn.addTarget(self, action: #selector(self.goBack), for: .touchUpInside)
+        backBtn.setImage(UIImage.init(named: "goback"), for: UIControlState())
+        self.navigationItem.leftBarButtonItems?.append(UIBarButtonItem.init(customView: backBtn))
         
         if type == LoadingWebviewType.eventWebsite {
             
@@ -36,7 +43,8 @@ class MMGoodsDetailsViewController: MMBaseViewController,UIWebViewDelegate{
         }
         
         if type == LoadingWebviewType.eventWebsite {
-            web = UIWebView.init(frame:CGRect(x: 0, y: 0, width: screenW, height: screenH - 64 ))
+            web = UIWebView.init()
+            web?.frame =  CGRect(x: 0, y: 0, width: screenW, height: screenH - 64)
             web?.loadRequest(URLRequest.init(url: url!))
             web?.delegate = self
             web?.scalesPageToFit = true
@@ -48,10 +56,10 @@ class MMGoodsDetailsViewController: MMBaseViewController,UIWebViewDelegate{
             
         }else if(type == LoadingWebviewType.goodsDetails){
             var frame = CGRect(x: 0, y: 0, width: screenW, height: screenH - 64)
-             NotificationCenter.default.addObserver(self, selector: #selector(self.wxPayBlock(_:)), name: NSNotification.Name(rawValue: "WxPay"), object: nil)
+             
             if isMyShop {
                 
-                frame = CGRect(x: 0, y: 0, width: screenW, height: screenH )
+                frame = CGRect(x: 0, y: 0, width: screenW, height: screenH)
             }
             let requst = NSMutableURLRequest(url: url!)
 //          设置请求方法为POST
@@ -60,11 +68,19 @@ class MMGoodsDetailsViewController: MMBaseViewController,UIWebViewDelegate{
             web?.delegate = self
             web?.scalesPageToFit = true
             // 设置请求参数
-            requst.httpBody = "token=\(MMUserInfo.UserInfo.token!)&device_id=\(UUID())".data(using: String.Encoding.utf8)
+//            requst.httpBody = "token=\(MMUserInfo.UserInfo.token!)&device_id=\(UUID())".data(using: String.Encoding.utf8)
             web?.loadRequest(requst as URLRequest);
             self.view.addSubview(web!)
         }
-        self.show()
+//        self.show()
+       
+    }
+    func goBack(){
+        if  (web?.canGoBack)!{
+            web?.goBack()
+        }else{
+            self.popViewControllerAnimated()
+        }
     }
     override func popViewControllerAnimated() {
         
@@ -111,93 +127,75 @@ class MMGoodsDetailsViewController: MMBaseViewController,UIWebViewDelegate{
             self.shareView.removeFromSuperview()
         }
     }
-    ///微信支付结果的回调
-    func wxPayBlock(_ notif:Notification) -> Void {
-        let resp = notif.userInfo!["resp"] as!BaseResp
-        switch resp.errCode {
-        case 0:
-            self.performSegue(withIdentifier: "MMPreviewShopViewController", sender: nil)
-            break
-        case -1:
-            self.show(resp.errStr, delay: 1)
-            break
-        case -2:
-            self.show("用户取消", delay: 1)
-            break
-        default:
-            break
-        }
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         if segue.identifier == "MMPreviewShopViewController"{
-            let controller = segue.destination as! MMPreviewShopViewController
-            controller.url = URL.init(string: Key.payGoods + order_sn!)
-            controller.titles = "支付成功"
-        }
-    }
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+}
+extension MMGoodsDetailsViewController : UIWebViewDelegate{
     func webViewDidStartLoad(_ webView: UIWebView) {
-        
-         self.title = webView.stringByEvaluatingJavaScript(from: "document.title")
+        self.navigationController?.progress = 0.5
+        self.title = webView.stringByEvaluatingJavaScript(from: "document.title")
     }
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-       self.title = webView.stringByEvaluatingJavaScript(from: "document.title")
+        self.title = webView.stringByEvaluatingJavaScript(from: "document.title")
         
-//        if type == LoadingWebviewType.goodsDetails {
-//            if self.title == "我的订单" || self.title == "授权登录"   {
-//               
-//                return true;
-//            }
-//            if !isOne {
-//                if self.title != "支付方式"{
-//                    let vC = MMGoodsDetailsViewController()
-//                    vC.url = request.URL
-//                    log(request.URL)
-//                    vC.type = LoadingWebviewType.goodsDetails
-//                    self.navigationController?.pushViewController(vC, animated: true)
-//                    return false
-//                }
-//            }
-//        
-//        }
-//        isOne = false
+        //        if type == LoadingWebviewType.goodsDetails {
+        //            if self.title == "我的订单" || self.title == "授权登录"   {
+        //
+        //                return true;
+        //            }
+        //            if !isOne {
+        //                if self.title != "支付方式"{
+        //                    let vC = MMGoodsDetailsViewController()
+        //                    vC.url = request.URL
+        //                    log(request.URL)
+        //                    vC.type = LoadingWebviewType.goodsDetails
+        //                    self.navigationController?.pushViewController(vC, animated: true)
+        //                    return false
+        //                }
+        //            }
+        //
+        //        }
+        //        isOne = false
         return true
     }
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        
+        self.navigationController?.finishProgress()
         self.title = webView.stringByEvaluatingJavaScript(from: "document.title")
         
         if type == LoadingWebviewType.goodsDetails {
+            let context = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as? JSContext
+            let jsmodel = MMJSModel()
             
-            if self.title == "支付方式"{
-                let context = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as? JSContext
-                let jsmodel = MMJSModel()
-                jsmodel.event = {[unowned self]  order_sn in
-                    
-                    self.order_sn = order_sn
-                }
-                jsmodel.controller = self
-                jsmodel.jsContext = context
-                context!.setObject(jsmodel, forKeyedSubscript: "xmbapp" as (NSCopying & NSObjectProtocol)!)
-                let curUrl = webView.request?.url?.absoluteString  //WebView当前访问页面的链接 可动态注册
-                context!.evaluateScript(try? String(contentsOf: URL.init(string: curUrl!)!, encoding: String.Encoding.utf8))
-                context!.exceptionHandler =  { (context, exception) in
-                    log( exception)
-                }
+            jsmodel.showmessage = {[unowned self]  ( message ) in
+                DispatchQueue.main.async(execute: {
+//                    let aleview = UIAlertView.init(title: "提示", message: message, delegate: nil, cancelButtonTitle: "确定")
+//                    aleview.show()
+                    self.show(message, delay: 0.5);
+                    self.popViewControllerAnimated();
+                })
+              
+            }
+            jsmodel.controller = self
+            jsmodel.jsContext = context
+            context!.setObject(jsmodel, forKeyedSubscript: "xmbapp" as (NSCopying & NSObjectProtocol)!)
+            let curUrl = webView.request?.url?.absoluteString  //WebView当前访问页面的链接 可动态注册
+            context!.evaluateScript(try? String(contentsOf: URL.init(string: curUrl!)!, encoding: String.Encoding.utf8))
+            context!.exceptionHandler =  { (context, exception) in
+                log( exception)
             }
             
             
-
         }
-                self.dismiss()
+//        self.dismiss()
     }
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         log(error)
-        self.dismiss()
-        self.show("加载失败", delay: 1);
-    }
-    
-}
+        self.navigationController?.cancelProgress()
+//        self.dismiss()
+//        self.show("加载失败", delay: 1);
+    }}

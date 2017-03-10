@@ -12,9 +12,6 @@
 
 #ifndef shareApp_Bridging_Header_h
 #define shareApp_Bridging_Header_h
-//#import "MJRefresh.h
-//#import "MBProgressHUD.h"
-//#import "Masonry.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
@@ -31,6 +28,4 @@
 #import "JPUSHService.h"
 //#import <JSPatch/JSPatch.h>
 #import "HKClipperVeiw.h"
-
-
 #endif /* ShareApp_Bridging_Header_h */

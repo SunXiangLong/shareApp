@@ -8,15 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		4991B19027573EE94E941B84 /* Pods_shareApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD407E8F4FEF46ABFB25470E /* Pods_shareApp.framework */; };
+		9F35E17A1E6FD8C200F48AFE /* personalCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35E1791E6FD8C200F48AFE /* personalCenterViewController.swift */; };
+		9F35E17F1E6FEA4200F48AFE /* jpush-ios-2.1.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F35E17D1E6FEA4200F48AFE /* jpush-ios-2.1.8.a */; };
 		9F39ABC01E0A15C000260F67 /* GiveFriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F39ABBF1E0A15C000260F67 /* GiveFriendsVC.swift */; };
 		9F39ABC21E0A15DD00260F67 /* UseHelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F39ABC11E0A15DD00260F67 /* UseHelpVC.swift */; };
 		9F39ABC41E0A4D6800260F67 /* shareBeansCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F39ABC31E0A4D6800260F67 /* shareBeansCell.swift */; };
 		9F39ABC61E0A4EFC00260F67 /* shareBeansModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F39ABC51E0A4EFC00260F67 /* shareBeansModel.swift */; };
+		9F5BE4FA1E6D426500D44AE8 /* shoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5BE4F91E6D426500D44AE8 /* shoppingCartViewController.swift */; };
+		9F5BE4FC1E6D5D9B00D44AE8 /* shoppingCartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5BE4FB1E6D5D9B00D44AE8 /* shoppingCartCell.swift */; };
 		9FC5E05E1DD46509005C9210 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC5DFC91DD46509005C9210 /* AppDelegate.swift */; };
 		9FC5E05F1DD46509005C9210 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9FC5DFCC1DD46509005C9210 /* AlipaySDK.bundle */; };
 		9FC5E0601DD46509005C9210 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5DFCD1DD46509005C9210 /* AlipaySDK.framework */; };
 		9FC5E0611DD46509005C9210 /* HKClipperVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC5DFD01DD46509005C9210 /* HKClipperVeiw.m */; };
-		9FC5E0621DD46509005C9210 /* jpush-ios-2.1.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5DFD31DD46509005C9210 /* jpush-ios-2.1.8.a */; };
 		9FC5E0631DD46509005C9210 /* RMParallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC5DFD61DD46509005C9210 /* RMParallax.swift */; };
 		9FC5E0641DD46509005C9210 /* RMParallaxItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC5DFD71DD46509005C9210 /* RMParallaxItem.swift */; };
 		9FC5E0651DD46509005C9210 /* TabCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC5DFD91DD46509005C9210 /* TabCollectionCell.swift */; };
@@ -146,13 +149,19 @@
 		9FC5E0F31DD4687F005C9210 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5E0F21DD4687F005C9210 /* MessageUI.framework */; };
 		9FC5E0F51DD46892005C9210 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5E0F41DD46892005C9210 /* libsqlite3.tbd */; };
 		9FC8140A1E094020001731DD /* shareBeansVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC814091E094020001731DD /* shareBeansVC.swift */; };
+		9FCF8B3F1E6CFC49006C8FA7 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCF8B3E1E6CFC49006C8FA7 /* BaseTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F35E1791E6FD8C200F48AFE /* personalCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = personalCenterViewController.swift; sourceTree = "<group>"; };
+		9F35E17D1E6FEA4200F48AFE /* jpush-ios-2.1.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.8.a"; sourceTree = "<group>"; };
+		9F35E17E1E6FEA4200F48AFE /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		9F39ABBF1E0A15C000260F67 /* GiveFriendsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveFriendsVC.swift; sourceTree = "<group>"; };
 		9F39ABC11E0A15DD00260F67 /* UseHelpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseHelpVC.swift; sourceTree = "<group>"; };
 		9F39ABC31E0A4D6800260F67 /* shareBeansCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shareBeansCell.swift; sourceTree = "<group>"; };
 		9F39ABC51E0A4EFC00260F67 /* shareBeansModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shareBeansModel.swift; sourceTree = "<group>"; };
+		9F5BE4F91E6D426500D44AE8 /* shoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shoppingCartViewController.swift; sourceTree = "<group>"; };
+		9F5BE4FB1E6D5D9B00D44AE8 /* shoppingCartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shoppingCartCell.swift; sourceTree = "<group>"; };
 		9FC5DE6B1DD41BA7005C9210 /* shareApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shareApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FC5DFC81DD46509005C9210 /* shareApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "shareApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		9FC5DFC91DD46509005C9210 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,8 +169,6 @@
 		9FC5DFCD1DD46509005C9210 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		9FC5DFCF1DD46509005C9210 /* HKClipperVeiw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKClipperVeiw.h; sourceTree = "<group>"; };
 		9FC5DFD01DD46509005C9210 /* HKClipperVeiw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKClipperVeiw.m; sourceTree = "<group>"; };
-		9FC5DFD31DD46509005C9210 /* jpush-ios-2.1.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.8.a"; sourceTree = "<group>"; };
-		9FC5DFD41DD46509005C9210 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		9FC5DFD61DD46509005C9210 /* RMParallax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMParallax.swift; sourceTree = "<group>"; };
 		9FC5DFD71DD46509005C9210 /* RMParallaxItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMParallaxItem.swift; sourceTree = "<group>"; };
 		9FC5DFD91DD46509005C9210 /* TabCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCollectionCell.swift; sourceTree = "<group>"; };
@@ -296,6 +303,7 @@
 		9FC5E0F21DD4687F005C9210 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		9FC5E0F41DD46892005C9210 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		9FC814091E094020001731DD /* shareBeansVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shareBeansVC.swift; sourceTree = "<group>"; };
+		9FCF8B3E1E6CFC49006C8FA7 /* BaseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		AF23B667D38786014B0BE954 /* Pods-shareApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shareApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-shareApp/Pods-shareApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F61D1E3AB2E255421FC7A08E /* Pods-shareApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shareApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-shareApp/Pods-shareApp.release.xcconfig"; sourceTree = "<group>"; };
 		FD407E8F4FEF46ABFB25470E /* Pods_shareApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shareApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -308,6 +316,7 @@
 			files = (
 				9FC5E0F51DD46892005C9210 /* libsqlite3.tbd in Frameworks */,
 				9FC5E0F31DD4687F005C9210 /* MessageUI.framework in Frameworks */,
+				9F35E17F1E6FEA4200F48AFE /* jpush-ios-2.1.8.a in Frameworks */,
 				9FC5E0F11DD46875005C9210 /* libc++.tbd in Frameworks */,
 				9FC5E0EF1DD4685C005C9210 /* libz.tbd in Frameworks */,
 				9FC5E0ED1DD4684F005C9210 /* SystemConfiguration.framework in Frameworks */,
@@ -323,7 +332,6 @@
 				9FC5E0D91DD4678E005C9210 /* Security.framework in Frameworks */,
 				9FC5E0D71DD46784005C9210 /* AdSupport.framework in Frameworks */,
 				9FC5E0D51DD46777005C9210 /* JavaScriptCore.framework in Frameworks */,
-				9FC5E0621DD46509005C9210 /* jpush-ios-2.1.8.a in Frameworks */,
 				4991B19027573EE94E941B84 /* Pods_shareApp.framework in Frameworks */,
 				9FC5E0601DD46509005C9210 /* AlipaySDK.framework in Frameworks */,
 			);
@@ -355,6 +363,23 @@
 				FD407E8F4FEF46ABFB25470E /* Pods_shareApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9F35E17B1E6FEA4200F48AFE /* JPush */ = {
+			isa = PBXGroup;
+			children = (
+				9F35E17C1E6FEA4200F48AFE /* lib */,
+			);
+			path = JPush;
+			sourceTree = "<group>";
+		};
+		9F35E17C1E6FEA4200F48AFE /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				9F35E17D1E6FEA4200F48AFE /* jpush-ios-2.1.8.a */,
+				9F35E17E1E6FEA4200F48AFE /* JPUSHService.h */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 		9FC5DE621DD41BA7005C9210 = {
@@ -392,9 +417,9 @@
 		9FC5DFCA1DD46509005C9210 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9F35E17B1E6FEA4200F48AFE /* JPush */,
 				9FC5DFCB1DD46509005C9210 /* AlipaySDK */,
 				9FC5DFCE1DD46509005C9210 /* ImageCropping */,
-				9FC5DFD11DD46509005C9210 /* JPush */,
 				9FC5DFD51DD46509005C9210 /* StartPage */,
 				9FC5DFD81DD46509005C9210 /* TabPageViewController */,
 				9FC5DFE01DD46509005C9210 /* WechatPay */,
@@ -418,23 +443,6 @@
 				9FC5DFD01DD46509005C9210 /* HKClipperVeiw.m */,
 			);
 			path = ImageCropping;
-			sourceTree = "<group>";
-		};
-		9FC5DFD11DD46509005C9210 /* JPush */ = {
-			isa = PBXGroup;
-			children = (
-				9FC5DFD21DD46509005C9210 /* lib */,
-			);
-			path = JPush;
-			sourceTree = "<group>";
-		};
-		9FC5DFD21DD46509005C9210 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				9FC5DFD31DD46509005C9210 /* jpush-ios-2.1.8.a */,
-				9FC5DFD41DD46509005C9210 /* JPUSHService.h */,
-			);
-			path = lib;
 			sourceTree = "<group>";
 		};
 		9FC5DFD51DD46509005C9210 /* StartPage */ = {
@@ -501,6 +509,7 @@
 				9FC5DFEB1DD46509005C9210 /* MMBaseTableViewController.swift */,
 				9FC5DFED1DD46509005C9210 /* MMNavigationController.swift */,
 				9FC5DFEC1DD46509005C9210 /* MMBaseViewController.swift */,
+				9FCF8B3E1E6CFC49006C8FA7 /* BaseTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -549,11 +558,11 @@
 				9FC5DFFB1DD46509005C9210 /* MMOpenShopPackageViewController.swift */,
 				9FC5DFFC1DD46509005C9210 /* MMPayResultsViewController.swift */,
 				9FC5DFFD1DD46509005C9210 /* MMPhoneCodeViewController.swift */,
-				9FC5DFFE1DD46509005C9210 /* MMPhoneLoginViewController.swift */,
 				9FC5DFFF1DD46509005C9210 /* MMResetPasswordViewController.swift */,
 				9FC5E0001DD46509005C9210 /* MMRetrievePasswordViewController.swift */,
-				9FC5E0011DD46509005C9210 /* MMToLoginViewController.swift */,
 				9FC5E0021DD46509005C9210 /* MMUserAgreementViewController.swift */,
+				9FC5DFFE1DD46509005C9210 /* MMPhoneLoginViewController.swift */,
+				9FC5E0011DD46509005C9210 /* MMToLoginViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -609,6 +618,8 @@
 				9FC814091E094020001731DD /* shareBeansVC.swift */,
 				9F39ABBF1E0A15C000260F67 /* GiveFriendsVC.swift */,
 				9F39ABC11E0A15DD00260F67 /* UseHelpVC.swift */,
+				9F5BE4F91E6D426500D44AE8 /* shoppingCartViewController.swift */,
+				9F35E1791E6FD8C200F48AFE /* personalCenterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -653,6 +664,7 @@
 				9FC5E03E1DD46509005C9210 /* MMVIPGoodsListTableViewCell.swift */,
 				9FC5E03F1DD46509005C9210 /* MMWithdrawalRecordTableViewCell.swift */,
 				9F39ABC31E0A4D6800260F67 /* shareBeansCell.swift */,
+				9F5BE4FB1E6D5D9B00D44AE8 /* shoppingCartCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -908,6 +920,7 @@
 				9FC5E0631DD46509005C9210 /* RMParallax.swift in Sources */,
 				9FC5E0941DD46509005C9210 /* MMSearchGoodsViewController.swift in Sources */,
 				9FC5E06A1DD46509005C9210 /* TabView.swift in Sources */,
+				9F5BE4FA1E6D426500D44AE8 /* shoppingCartViewController.swift in Sources */,
 				9FC5E0651DD46509005C9210 /* TabCollectionCell.swift in Sources */,
 				9FC5E0CC1DD46509005C9210 /* JPusService.swift in Sources */,
 				9FC5E0AA1DD46509005C9210 /* MMQrcodeView.swift in Sources */,
@@ -928,6 +941,7 @@
 				9FC5E0691DD46509005C9210 /* TabPageViewController.swift in Sources */,
 				9FC5E0B91DD46509005C9210 /* MMVIPGoodsListTableViewCell.swift in Sources */,
 				9FC5E0921DD46509005C9210 /* MMPersonalCenterViewController.swift in Sources */,
+				9F5BE4FC1E6D5D9B00D44AE8 /* shoppingCartCell.swift in Sources */,
 				9FC5E0981DD46509005C9210 /* MMShowResultViewController.swift in Sources */,
 				9FC5E0831DD46509005C9210 /* MMPickerSelectionView.swift in Sources */,
 				9FC5E0BA1DD46509005C9210 /* MMWithdrawalRecordTableViewCell.swift in Sources */,
@@ -947,6 +961,7 @@
 				9FC5E0991DD46509005C9210 /* MMSortingTableViewController.swift in Sources */,
 				9FC5E0871DD46509005C9210 /* MMBrandGoodsListTableViewController.swift in Sources */,
 				9FC5E0C91DD46509005C9210 /* UITableViewCell+extension.swift in Sources */,
+				9FCF8B3F1E6CFC49006C8FA7 /* BaseTabBarController.swift in Sources */,
 				9FC5E09A1DD46509005C9210 /* MMTabPageViewController.swift in Sources */,
 				9FC5E06D1DD46509005C9210 /* payRequsestHandler.mm in Sources */,
 				9FC5E0841DD46509005C9210 /* MMAppIntroducedTableViewController.swift in Sources */,
@@ -956,6 +971,7 @@
 				9FC5E0711DD46509005C9210 /* MMBaseViewController.swift in Sources */,
 				9FC5E0A81DD46509005C9210 /* MMMyOrderTableViewCell.swift in Sources */,
 				9FC5E07A1DD46509005C9210 /* MMNewShopRegistrationViewController.swift in Sources */,
+				9F35E17A1E6FD8C200F48AFE /* personalCenterViewController.swift in Sources */,
 				9FC5E0D21DD4650A005C9210 /* PublicTool.swift in Sources */,
 				9FC5E0AD1DD46509005C9210 /* MMsetingCollectionViewCell.swift in Sources */,
 				9FC5E0C51DD46509005C9210 /* Color+Extension.swift in Sources */,

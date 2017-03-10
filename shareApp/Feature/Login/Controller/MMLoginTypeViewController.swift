@@ -13,7 +13,7 @@ class MMLoginTypeViewController: MMBaseViewController {
         
         
     }
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -26,16 +26,16 @@ class MMLoginTypeViewController: MMBaseViewController {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
     }
- 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        startPage(self.view)
         
         
-       
+        
+        
     }
-        @IBAction func login(_ sender: AnyObject) {
+    @IBAction func login(_ sender: AnyObject) {
         self.performSegue(withIdentifier: "MMToLoginViewController", sender: self)
         
     }
@@ -44,12 +44,12 @@ class MMLoginTypeViewController: MMBaseViewController {
         self.performSegue(withIdentifier: "MMUserRegistrationViewController", sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let vc = sender?.destinationViewController;
+        //        let vc = sender?.destinationViewController;
         
         
     }
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

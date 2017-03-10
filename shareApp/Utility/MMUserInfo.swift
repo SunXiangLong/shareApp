@@ -44,7 +44,10 @@ class  MMUserInfo {
     var shop_invite_qr: URL!
      /// 商店分享的二维码图片url
     var shop_share_qr: URL!
-    
+    /// 我的购物车url
+    var cart_url: URL!
+    /// 个人中心url
+    var ucenter_url: URL!
     /// 是否绑定银行卡
     var card_bind_status:Bool!
     /// 卡号
@@ -60,7 +63,7 @@ class  MMUserInfo {
     /// 用户购买的开店码（购买成功存在，否则为nil）
     var code:String!
    
-    
+
     
     /// 店铺对象数组
     var shareInfo:[ShopShareInfo] = []
@@ -87,7 +90,27 @@ class  MMUserInfo {
         self.shop_share_url = model?.data!["shop_share_url"].URL
         self.shop_preview_url = model?.data!["shop_preview_url"].URL
         self.shop_invite_qr = model?.data!["shop_invite_qr"].URL
+        ucenter_url = model?.data!["ucenter_url"].URL
+        cart_url = model?.data!["cart_url"].URL
+        card_bind_status = model?.data!["card_bind_status"].number == (1) ? true : false
+        card_no = model?.data!["card_no"].string
+        real_name = model?.data!["real_name"].string
+        branch_bank = model?.data!["branch_bank"].string
+        deposit_bank = model?.data!["deposit_bank"].string
         
+        
+        if model?.data!["shop_share_info"] != nil {
+            
+            for model in model!.data!["shop_share_info"].array! {
+                let shopShareInfoModel = ShopShareInfo.init(json: model)
+                shareInfo.append(shopShareInfoModel)
+                
+                if model["is_default"] == "1" {
+                    shopShareModel = shopShareInfoModel
+                }
+            }
+        }
+
        ///保存用户信息到本地
         UserDefaults.standard.set(model?.data?.dictionaryObject, forKey: "userinfo")
         
@@ -111,6 +134,21 @@ class  MMUserInfo {
         shop_share_qr = nil
         shop_invite_qr = nil
         shop_share_vip_qr = nil
+        shop_share_normal_url = nil
+        shop_preview_url = nil
+        cart_url = nil
+        ucenter_url = nil
+        card_bind_status = nil
+        card_no = nil
+        real_name = nil
+        branch_bank = nil
+        deposit_bank = nil
+        
+        shopShareModel = nil
+        shareInfo = []
+        available_balance = nil
+        code = nil
+        
         
     }
     

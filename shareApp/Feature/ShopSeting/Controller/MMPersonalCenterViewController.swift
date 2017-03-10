@@ -11,16 +11,15 @@ import UIKit
 class MMPersonalCenterViewController: MMBaseCollectionViewController {
     
     let operatorCellModelArr = [
-        optionCellModel.init(optionimage: UIImage.init(named: "mm_syicon1"), optionsStr: "选品上架"),
         optionCellModel.init(optionimage: UIImage.init(named: "mm_syicon2"), optionsStr: "VIP专享"),
         optionCellModel.init(optionimage: UIImage.init(named: "mm_syicon3"), optionsStr: "我的店铺"),
         optionCellModel.init(optionimage: UIImage.init(named: "mm_syicon4"), optionsStr: "我的收益"),
         optionCellModel.init(optionimage: UIImage.init(named: "mm_syicon5"), optionsStr: "订单管理"),
+        optionCellModel.init(optionimage: UIImage.init(named: "mm_syicon1"), optionsStr: "个人中心"),
         optionCellModel.init(optionimage: UIImage.init(named: "mm_syicon6"), optionsStr: "设置"),
         optionCellModel.init(optionimage: UIImage.init(named: "mm_syicon7"), optionsStr: "邀请好友")]
     var statisticShopInfo:shopStatisticInfo?
     var type:String?
-    var shopinfo:shopInfo?
     var headView:MMSetingReusableView?
     lazy var customFlowLayout:UICollectionViewFlowLayout = {
         let customFlowLayout = UICollectionViewFlowLayout()
@@ -34,8 +33,13 @@ class MMPersonalCenterViewController: MMBaseCollectionViewController {
     }()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.collectionView?.reloadData()
+        if   MMUserInfo.UserInfo.token == nil{
+            statisticShopInfo = nil
+            self.collectionView?.reloadData()
+        }
+        
         self.navigationController?.isNavigationBarHidden = true
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -48,10 +52,19 @@ class MMPersonalCenterViewController: MMBaseCollectionViewController {
         viewModel.refreshtStatusype.value = .invalidData
         viewModel.refreshtStatusype.value = .pullSuccessNoMoreData
         collectionView?.alwaysBounceVertical = true
-        requestStoreInfo()
         collectionView?.setCollectionViewLayout(self.customFlowLayout, animated: true)
+        if !self.toLogIn(){
+            return
+        }else{
+            self.statisticStoreInfo()
+        }
     }
     @IBAction func pusShopSeting(_ sender: UITapGestureRecognizer) {
+        
+        if !self.toLogIn(){
+            return
+        }
+        
         if MMUserInfo.UserInfo.shareInfo.count > 0 {
             self.performSegue(withIdentifier: "MMShopsSetTableViewController", sender: nil)
         }else{
@@ -64,37 +77,7 @@ class MMPersonalCenterViewController: MMBaseCollectionViewController {
     
     
     
-    /**
-     获取店铺基本信息
-     */
-    func requestStoreInfo() -> Void {
-        self.show()
-        HTTPTool.PostNoHUD(API.shopBaseInfo, parameters: ["token":MMUserInfo.UserInfo.token!]) { (model, error) in
-            
-            if model != nil{
-                //                log("dic=====\(model?.data)")
-                if model?.status == (1){
-                    self.shopinfo =  shopInfo.init(json: (model?.data)!)
-                    self.statisticStoreInfo()
-                }else{
-                    self.dismiss()
-                    self.show(model?.info , delay: 1)
-                }
-                
-            }else{
-                self.dismiss()
-                
-                self.show("请求失败", delay: 0.7)
-                
-                
-                
-            }
-        }
-        
-    }
-    /**
-     获取店铺统计信息
-     */
+    /**获取店铺统计信息*/
     func statisticStoreInfo() -> Void {
         
         HTTPTool.PostNoHUD(API.statisticInfo, parameters: ["token":MMUserInfo.UserInfo.token!]) { (model, error) in
@@ -259,34 +242,33 @@ class MMPersonalCenterViewController: MMBaseCollectionViewController {
         case UICollectionElementKindSectionHeader:
             let rusableView  = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MMsetingCollectionHeadView", for: indexPath) as? MMSetingReusableView
             rusableView?.statisticShopInfo = self.statisticShopInfo
-            rusableView?.shopinfo = self.shopinfo
             headView = rusableView;
             return rusableView!
         default: return UICollectionReusableView()
             
         }
     }
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if !self.toLogIn(){
+            return
+        }
         switch indexPath.row {
         case 0:
-            self.requestDta(false)
-        case 1:
             self.requestDta(true)
-        case 2:
+        case 1:
             self.performSegue(withIdentifier: "MMMyShopTableViewController", sender: nil)
-            
-        case 3:
+        case 2:
             self.performSegue(withIdentifier: "MMMyEarningsTableViewController", sender: nil)
-            
-        case 4:
+        case 3:
             self.orderOrderTypeRequestDta()
-            
+        case 4:
+            self.performSegue(withIdentifier: "personalCenterViewController", sender: nil)
         case 5:
             self.performSegue(withIdentifier: "MMSetUpTableViewController", sender: nil)
-            
         case 6:
             self.performSegue(withIdentifier: "MMInviteFriendViewController", sender: nil)
-            
         default:
             break
             

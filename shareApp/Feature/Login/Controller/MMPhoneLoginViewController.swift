@@ -20,7 +20,8 @@ class MMPhoneLoginViewController: MMBaseViewController {
     @IBOutlet weak var codeTextField: AnimatableTextField!
     
     var countdownTimer: Timer?
-  
+    var  selectedIndex = 0
+ 
     var isCounting = false {
         willSet {
             if newValue {
@@ -56,16 +57,25 @@ class MMPhoneLoginViewController: MMBaseViewController {
         isCounting = false
         
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
          self.title = "手机号登录"
+         self.rightStr = "注册"
+       
+   
         
         
-      
         // Do any additional setup after loading the view.
     }
 
-    
+    @IBAction func tologin(_ sender: Any) {
+        self.performSegue(withIdentifier: "MMToLoginViewController", sender: nil)
+    }
+   
+    override func rightBtnSelector() {
+          self.performSegue(withIdentifier: "MMNewShopRegistrationViewController", sender: nil)
+    }
     @IBAction func sendButtonClick(_ sender: AnyObject) {
         
         self .sendCode()
@@ -73,7 +83,7 @@ class MMPhoneLoginViewController: MMBaseViewController {
     
     @IBAction func login(_ sender: AnyObject) {
         //当为测试账号时走账号密码登录流程，防止傻逼苹果审核人员死活在用短信验证码的登录界面 用密码当验证码使用登录不上给拒了
-        if phoneTextField.text! == "18600763021" && codeTextField.text! == "123456"{
+        if phoneTextField.text! == "15910810785" && codeTextField.text! == "123456"{
             self.postData()
         }else{
             self.phoneLoginRequest()
@@ -121,7 +131,13 @@ class MMPhoneLoginViewController: MMBaseViewController {
                 if  model?.status  == (1){
                     
                     MMUserInfo.UserInfo.initUserInfo(model)
-                    self.performSegue(withIdentifier: "MMPersonalCenterViewControllerOne", sender: nil)
+                    let TabBar = UIStoryboard(name: "ShopSeting", bundle: nil).instantiateViewController(withIdentifier: "TabBar") as!UITabBarController
+                    TabBar.selectedIndex = self.selectedIndex
+                    UIApplication.shared.keyWindow?.rootViewController = TabBar
+                    self.view.endEditing(false)
+                
+
+                    
                     
                 }
                 
@@ -143,7 +159,10 @@ class MMPhoneLoginViewController: MMBaseViewController {
                  if  model?.status  == (1){
 
                     MMUserInfo.UserInfo.initUserInfo(model)
-                    self.performSegue(withIdentifier: "MMPersonalCenterViewControllerOne", sender: nil)
+                    let TabBar = UIStoryboard(name: "ShopSeting", bundle: nil).instantiateViewController(withIdentifier: "TabBar") as!UITabBarController
+                    TabBar.selectedIndex = self.selectedIndex
+                    UIApplication.shared.keyWindow?.rootViewController = TabBar
+                    self.view.endEditing(false)
   
                 }
                 
@@ -166,6 +185,10 @@ class MMPhoneLoginViewController: MMBaseViewController {
             let vc = nav.viewControllers.first as! MMPersonalCenterViewController
             vc.type = "跳转"
             
+        }else if segue.identifier == "MMToLoginViewController" {
+            let vc = segue.destination as!MMToLoginViewController
+            vc.selectedIndex = selectedIndex
+        
         }
         
         

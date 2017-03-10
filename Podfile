@@ -10,7 +10,7 @@ target 'shareApp' do
     #    pod "Device"
     pod 'SwiftDate' ,:git => 'https://github.com/malcommac/SwiftDate.git', :tag => '4.0.7'
     pod 'IBAnimatable',:git => 'https://github.com/IBAnimatable/IBAnimatable.git', :tag => '3.0.1'
-    
+    pod 'KYNavigationProgress'
     pod 'IQKeyboardManagerSwift' ,:git => 'https://github.com/hackiftekhar/IQKeyboardManager.git', :tag => 'v4.0.7'
 #    需要 Xcode 8.0 Swift 3.0 required
     pod 'RxSwift',:git => 'https://github.com/ReactiveX/RxSwift.git', :tag => '3.0.0'

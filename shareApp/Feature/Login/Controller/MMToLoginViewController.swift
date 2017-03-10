@@ -14,7 +14,7 @@ class MMToLoginViewController: MMBaseViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     var password:String?
-    
+    var  selectedIndex = 0
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         password = UserDefaults.standard.value(forKey: "password") as! String!
@@ -27,13 +27,18 @@ class MMToLoginViewController: MMBaseViewController {
         
         }
     }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "帐号登录"
+        self.rightStr = "注册"
+        
         
     }
 
-    
+    override func rightBtnSelector() {
+        self.performSegue(withIdentifier: "MMNewShopRegistrationViewController", sender: nil)
+    }
     
     @IBAction func login(_ sender: AnyObject) {
         
@@ -51,7 +56,10 @@ class MMToLoginViewController: MMBaseViewController {
                 if  model?.status  == (1){
     
                     MMUserInfo.UserInfo.initUserInfo(model)
-                    self.performSegue(withIdentifier: "MMPersonalCenterViewControllerTwo", sender: nil)
+                    let TabBar = UIStoryboard(name: "ShopSeting", bundle: nil).instantiateViewController(withIdentifier: "TabBar") as!UITabBarController
+                    TabBar.selectedIndex = self.selectedIndex
+                    UIApplication.shared.keyWindow?.rootViewController = TabBar
+                    self.view.endEditing(false)
                     
                 }
            
@@ -66,6 +74,7 @@ class MMToLoginViewController: MMBaseViewController {
   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
         // Dispose of any resources that can be recreated.
     }
     
@@ -77,9 +86,9 @@ class MMToLoginViewController: MMBaseViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MMPersonalCenterViewControllerTwo" {
-            let nav = segue.destination as!MMNavigationController
-            let vc = nav.viewControllers.first as! MMPersonalCenterViewController
-            vc.type = "跳转"
+//            let TabBar = segue.destination as!UITabBarController
+//            let vc = nav.viewControllers.first as! MMPersonalCenterViewController
+//            vc.type = "跳转"
             
         }
         

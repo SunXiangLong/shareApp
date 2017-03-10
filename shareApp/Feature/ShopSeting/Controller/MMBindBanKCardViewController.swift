@@ -20,6 +20,8 @@ class MMBindBanKCardViewController: MMBaseViewController,UITextFieldDelegate{
     @IBOutlet weak var branchBankTextField: AnimatableTextField!
     @IBOutlet weak var cardNoTextField: AnimatableTextField!
     @IBOutlet weak var mobilePhoneTextField: AnimatableTextField!
+//    var isBack = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         heightConstraint.constant = 0.4
@@ -40,6 +42,10 @@ class MMBindBanKCardViewController: MMBaseViewController,UITextFieldDelegate{
                 if model?.status == (1){
                     
                     self.show(model?.info, delay: 1)
+//                    if self.isBack{
+//                        self.popViewController(animated: true);
+//                        return;
+//                    }
                     MMUserInfo.UserInfo.branch_bank = model?.data!["branch_bank"].string
                     MMUserInfo.UserInfo.card_no = model?.data!["card_no"].string
                     MMUserInfo.UserInfo.card_bind_status = true

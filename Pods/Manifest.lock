@@ -3,6 +3,7 @@ PODS:
   - IBAnimatable (3.0.1)
   - IQKeyboardManagerSwift (4.0.6)
   - Kingfisher (3.1.4)
+  - KYNavigationProgress (2.0.1)
   - MBProgressHUD (1.0.0)
   - MJRefresh (3.1.12)
   - MOBFoundation (2.2.10)
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - IBAnimatable (from `https://github.com/IBAnimatable/IBAnimatable.git`, tag `3.0.1`)
   - IQKeyboardManagerSwift (from `https://github.com/hackiftekhar/IQKeyboardManager.git`, tag `v4.0.7`)
   - Kingfisher (from `https://github.com/onevcat/Kingfisher.git`, tag `3.1.4`)
+  - KYNavigationProgress
   - MBProgressHUD
   - MJRefresh
   - MOBFoundation (from `https://github.com/ShareSDKPlatform/MOBFoundation.git`, tag `2.2.10`)
@@ -115,6 +117,7 @@ SPEC CHECKSUMS:
   IBAnimatable: 709f04a2b951c55db9ac4d8893684830bbdd0be2
   IQKeyboardManagerSwift: b3015e819559ca76381f87a0833f44d178564603
   Kingfisher: 6c67e3e57f2d81a9cfdfa25052cd86f33ceac9bb
+  KYNavigationProgress: 7f979e79f6e57b1ee33d3de89d6b705a1f4e266a
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   MOBFoundation: 3cca6f267be8ea7643be0d27ec871b66b64e32fd
@@ -126,6 +129,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c3f3eca60f74beabce1d0aacf909a927ef7822b4
   UMengAnalytics: 19b28253793d77dff10fb7d502faad1fb6b8ce4a
 
-PODFILE CHECKSUM: 5dfb42b896684adde8025b51ccc708cfb8894ad1
+PODFILE CHECKSUM: 76f138e829df0715dcb5fd86b62a5dd861f99312
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

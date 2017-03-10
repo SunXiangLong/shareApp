@@ -15,7 +15,8 @@ class MMBaseTableViewController: UITableViewController {
     var rightStr:String?{
         didSet{
             if rightStr != nil {
-                self.rightBtn!.setTitle(rightStr!, for: UIControlState())
+//                self.rightBtn!.setTitle(rightStr!, for: UIControlState())
+                self.rightBtn?.setTitle(rightStr, for: .normal)
                log(rightBtn)
             }
             
@@ -25,7 +26,7 @@ class MMBaseTableViewController: UITableViewController {
     var rightImageStr:String?{
         didSet{
             if rightStr != nil {
-                self.rightBtn!.setImage(UIImage.init(named: rightImageStr!), for: UIControlState())
+                self.rightBtn!.setImage(UIImage.init(named: rightImageStr!), for: .normal)
                
             }
             
@@ -66,7 +67,8 @@ class MMBaseTableViewController: UITableViewController {
         rightBtn?.frame = CGRect(x: screenW - 60, y: 0, width: 60, height: 44);
         rightBtn?.addTarget(self, action: #selector(self.rightBtnSelector), for: .touchUpInside)
         self.rightBtn?.titleLabel?.font = UIFont.init(name: NeueFont, size: 14)
-        self.rightBtn?.titleLabel?.textColor = "555555".color
+//        self.rightBtn?.titleLabel?.textColor = "555555".color
+        self.rightBtn?.setTitleColor("555555".color, for: .normal);
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn!)
     }
     

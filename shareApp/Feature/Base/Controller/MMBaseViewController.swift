@@ -47,11 +47,13 @@ class MMBaseViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        if self.navigationController != nil {
+//            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        }
         
         self.backBtn = UIButton.init(type: .custom)
-        self.backBtn!.frame = CGRect(x: 0, y: 0, width: 44, height: 44);
-        self.backBtn!.imageEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0)
+        self.backBtn!.frame = CGRect(x: 0, y: 0, width: 30, height: 44);
+        self.backBtn!.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0)
         self.backBtn!.addTarget(self, action: #selector(self.popViewControllerAnimated), for: .touchUpInside)
         self.backBtn!.setImage(UIImage.init(named: "back_arrow"), for: UIControlState())
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: backBtn!)
@@ -80,6 +82,7 @@ class MMBaseViewController: UIViewController {
     }
     func popViewControllerAnimated() -> Void {
         self.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -95,6 +98,27 @@ class MMBaseViewController: UIViewController {
 }
 extension UIViewController{
    
+    func toLogIn() -> Bool {
+        if let _ = MMUserInfo.UserInfo.token{
+            return true
+        }else{
+            
+            let nav = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginNavigationController") as!MMNavigationController
+            let vc =  nav.viewControllers.first as!MMPhoneLoginViewController
+            let selfStr = String.init(describing: type(of:self))
+            switch selfStr {
+            case "MMTabPageViewController":vc.selectedIndex = 0
+            case "shoppingCartViewController":vc.selectedIndex = 1
+            case "MMPersonalCenterViewController":vc.selectedIndex = 2
+            default:break
+            }
+            log(vc.selectedIndex)
+            self.navigationController?.present(nav, animated: false, completion: nil);
+            
+            return false
+        }
+        
+    }
     
     func popViewController(animated: Bool) -> Void {
       _ =  self.navigationController?.popViewController(animated: animated)
