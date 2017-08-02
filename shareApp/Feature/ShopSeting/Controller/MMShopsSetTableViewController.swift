@@ -35,14 +35,14 @@ class MMShopsSetTableViewController: MMBaseTableViewController{
         HTTPTool.PostNoHUD(API.shopDeleteShare, parameters: ["token":MMUserInfo.UserInfo.token!,"share_id":model.id]) { (model, error) in
             self.dismiss()
             if model != nil{
-                log("dic=====\(model?.data)")
+                log("dic=====\(String(describing: model?.data))")
                 if model?.status == (1){
                     self.show(model?.info , delay: 1)
                     MMUserInfo.UserInfo.shareInfo.remove(at: indexPath.row)
                     self.tableView.reloadData()
                 }
             }else{
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
                 self.show("请求失败", delay: 1)
                 
             }
@@ -57,7 +57,7 @@ class MMShopsSetTableViewController: MMBaseTableViewController{
         HTTPTool.PostNoHUD(API.shopSetDefault, parameters: ["token":MMUserInfo.UserInfo.token!,"share_id":sharModel.id]) { (model, error) in
             self.dismiss()
             if model != nil{
-                log("dic=====\(model?.data)")
+                log("dic=====\(String(describing: model?.data))")
                 if model?.status == (1){
                     self.show(model?.info, delay: 1)
                     if self.indexPath != nil{
@@ -76,7 +76,7 @@ class MMShopsSetTableViewController: MMBaseTableViewController{
                     
                 }
             }else{
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
                 self.show("请求失败", delay: 1)
                 
             }

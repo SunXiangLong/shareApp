@@ -35,7 +35,7 @@ class MMRetrievePasswordViewController: MMBaseViewController {
             
             if model != nil{
             
-                log("dic=====\(model?.data)")
+                log("dic=====\(String(describing: model?.data))")
                 if  model?.status  == (1){
                     let alertController = UIAlertController.init(title: "提示", message: model?.info, preferredStyle: .alert)
                     alertController.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
@@ -49,7 +49,7 @@ class MMRetrievePasswordViewController: MMBaseViewController {
                 }
                         }else{
                 
-                log("erro == \(erro)")
+                log("erro == \(String(describing: erro))")
                 
             }
         }

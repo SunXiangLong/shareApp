@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zii-uY-9ZF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G12b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zii-uY-9ZF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -16,7 +16,7 @@
         <scene sceneID="K6D-bP-ibj">
             <objects>
                 <collectionViewController id="qJr-D4-43n" customClass="MMPersonalCenterViewController" customModule="shareApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="hIh-nl-BAP">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="hIh-nl-BAP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -960,7 +960,7 @@
                         <viewControllerLayoutGuide type="top" id="cQW-bp-eLm"/>
                         <viewControllerLayoutGuide type="bottom" id="UkM-Sw-3wJ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="2Ek-UK-6Xh">
+                    <view key="view" contentMode="scaleToFill" id="2Ek-UK-6Xh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -994,7 +994,7 @@
                 <pageViewController transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="XVh-69-nBv" customClass="MMTabPageViewController" customModule="shareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="9Pl-80-se0">
                         <textField key="titleView" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="   请输入商品名称" textAlignment="natural" minimumFontSize="17" id="ePR-1Q-KaQ" customClass="AnimatableTextField" customModule="IBAnimatable">
-                            <rect key="frame" x="84" y="7" width="208" height="30"/>
+                            <rect key="frame" x="83.5" y="7" width="208" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1086,12 +1086,12 @@
                     </connections>
                 </button>
             </objects>
-            <point key="canvasLocation" x="-8285" y="-1589"/>
+            <point key="canvasLocation" x="-8204" y="-1589"/>
         </scene>
         <!--Choose Goods Shelves Table View Controller-->
         <scene sceneID="CVd-e7-Blu">
             <objects>
-                <tableViewController storyboardIdentifier="MMChooseGoodsShelvesTableViewController" id="8rU-sY-cqy" customClass="MMChooseGoodsShelvesTableViewController" customModule="shareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MMChooseGoodsShelvesTableViewController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="8rU-sY-cqy" customClass="MMChooseGoodsShelvesTableViewController" customModule="shareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="164" sectionHeaderHeight="18" sectionFooterHeight="18" id="nnO-DD-ll1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1310,15 +1310,40 @@
                             <outlet property="delegate" destination="8rU-sY-cqy" id="HBY-Eu-QVU"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="eUp-Oa-WkG">
+                        <textField key="titleView" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="   请输入商品名称" textAlignment="natural" minimumFontSize="17" id="prM-qA-DL1" userLabel="请输入商品名称" customClass="AnimatableTextField" customModule="IBAnimatable">
+                            <rect key="frame" x="84" y="7" width="208" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="mm_search"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="leftImageLeftPadding">
+                                    <real key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <outlet property="delegate" destination="8rU-sY-cqy" id="fYv-hb-A7U"/>
+                            </connections>
+                        </textField>
+                        <barButtonItem key="rightBarButtonItem" image="mm_sort" id="AU1-s3-VE4"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="searchTextField" destination="prM-qA-DL1" id="Lsx-lc-Dlm"/>
                         <outlet property="tableHeadView" destination="ASP-eB-FGo" id="u8V-Qy-AY5"/>
                         <segue destination="bjw-Ay-WmV" kind="show" identifier="MMGoodsDetailsViewController" id="huz-Xb-W5Z"/>
                         <segue destination="hp2-oV-F68" kind="show" identifier="MMBrandGoodsListTableViewController" id="Ea3-Mj-Qaq"/>
+                        <segue destination="0aZ-Eu-R1t" kind="show" identifier="MMSearchGoodsViewController" id="r2c-cI-YNH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfU-Px-1S1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2101" y="258"/>
+            <point key="canvasLocation" x="1926" y="486"/>
         </scene>
         <!--Search History Table View Controller-->
         <scene sceneID="9Ip-QE-Ch7">
@@ -1710,15 +1735,21 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rNQ-iw-HjK" customClass="CountingLabel" customModule="shareApp" customModuleProvider="target">
-                                    <rect key="frame" x="150" y="45" width="76" height="43"/>
+                                    <rect key="frame" x="150" y="40" width="76" height="43"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                     <color key="textColor" red="0.98431372549019602" green="0.31764705882352939" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可提现金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jf-z3-VsO" customClass="AnimatableLabel" customModule="IBAnimatable">
-                                    <rect key="frame" x="149" y="101" width="77" height="18"/>
+                                    <rect key="frame" x="149" y="96" width="77" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小提示：麻包卡支付部分暂不支持返现" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFu-K6-IWV" customClass="AnimatableLabel" customModule="IBAnimatable">
+                                    <rect key="frame" x="75.5" y="119" width="225.5" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -1726,7 +1757,9 @@
                             <constraints>
                                 <constraint firstItem="6jf-z3-VsO" firstAttribute="top" secondItem="rNQ-iw-HjK" secondAttribute="bottom" constant="13" id="5za-pq-uP9"/>
                                 <constraint firstItem="6jf-z3-VsO" firstAttribute="centerX" secondItem="Slg-r8-NB0" secondAttribute="centerX" id="Lw0-wa-fxH"/>
-                                <constraint firstItem="rNQ-iw-HjK" firstAttribute="top" secondItem="Slg-r8-NB0" secondAttribute="top" constant="45" id="bQk-eX-aIH"/>
+                                <constraint firstItem="HFu-K6-IWV" firstAttribute="centerX" secondItem="Slg-r8-NB0" secondAttribute="centerX" id="QaQ-9f-PVT"/>
+                                <constraint firstItem="rNQ-iw-HjK" firstAttribute="top" secondItem="Slg-r8-NB0" secondAttribute="top" constant="40" id="bQk-eX-aIH"/>
+                                <constraint firstItem="HFu-K6-IWV" firstAttribute="top" secondItem="6jf-z3-VsO" secondAttribute="bottom" constant="5" id="m7j-In-2GU"/>
                                 <constraint firstItem="rNQ-iw-HjK" firstAttribute="centerX" secondItem="Slg-r8-NB0" secondAttribute="centerX" id="xww-vK-0gP"/>
                             </constraints>
                         </view>
@@ -1820,7 +1853,7 @@
                     </connections>
                 </button>
             </objects>
-            <point key="canvasLocation" x="-6625" y="3766"/>
+            <point key="canvasLocation" x="-6868" y="3279"/>
         </scene>
         <!--My Order Tab Page View Controller-->
         <scene sceneID="dPr-wP-c1t">
@@ -1872,7 +1905,7 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MMMyOrderTableViewCell" rowHeight="91" id="off-p7-AIH" customClass="MMMyOrderTableViewCell" customModule="shareApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="375" height="91"/>
+                                <rect key="frame" x="0.0" y="55" width="375" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="off-p7-AIH" id="4Oo-cV-5V3">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
@@ -2621,7 +2654,7 @@
                         <viewControllerLayoutGuide type="bottom" id="DEw-v3-t23"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vxi-Qg-nke">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您的姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3wD-9H-bdm" customClass="AnimatableTextField" customModule="IBAnimatable">
@@ -2960,7 +2993,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wi1-9u-u8n"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Lr4-Zk-3VN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j8T-DF-KFP">
@@ -3075,7 +3108,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTN-oL-1T6">
-                                <rect key="frame" x="0.0" y="568" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <color key="backgroundColor" red="0.86274509803921573" green="0.23921568627450979" blue="0.20392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="A6I-jE-fVM"/>
@@ -3112,11 +3145,12 @@
                         <outlet property="bankLabel" destination="xfa-H3-uuh" id="vxc-2S-rHU"/>
                         <outlet property="realNameLabel" destination="0ES-Dx-3fU" id="AkE-C7-0kF"/>
                         <segue destination="anK-Ix-vaY" kind="show" identifier="MMShowResultViewController" id="ZxK-el-ePh"/>
+                        <segue destination="YjN-Yt-hpf" kind="show" identifier="MMBindBanKCardViewController" id="WpH-5N-b5y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KGV-75-fOZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5587" y="3281"/>
+            <point key="canvasLocation" x="-5506" y="3280"/>
         </scene>
         <!--Share BeansVC-->
         <scene sceneID="BpP-4b-gSO">
@@ -3361,7 +3395,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZYs-bQ-fcy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6138" y="4166"/>
+            <point key="canvasLocation" x="-5812" y="4137"/>
         </scene>
         <!--Give FriendsVC-->
         <scene sceneID="RAj-pW-mGr">
@@ -3587,7 +3621,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSc-sD-WbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5630" y="4166"/>
+            <point key="canvasLocation" x="-5106" y="4137"/>
         </scene>
         <!--Use HelpVC-->
         <scene sceneID="b8p-qu-TVc">
@@ -3634,7 +3668,7 @@
                         <viewControllerLayoutGuide type="bottom" id="71Q-05-Ria"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7IJ-ie-PYv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mm_successful" translatesAutoresizingMaskIntoConstraints="NO" id="4JH-fM-JOW">
@@ -3681,7 +3715,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eln-N7-Mht" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5105" y="3323"/>
+            <point key="canvasLocation" x="-4874" y="3280"/>
         </scene>
         <!--Sorting Table View Controller-->
         <scene sceneID="9fW-F8-3aj">
@@ -3744,7 +3778,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UZv-nh-ZcM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7944" y="-1819"/>
+            <point key="canvasLocation" x="-7637" y="-1808"/>
         </scene>
         <!--Base Tab Bar Controller-->
         <scene sceneID="5lC-4o-3uW">
@@ -3801,10 +3835,10 @@
             </objects>
             <point key="canvasLocation" x="-8921" y="708"/>
         </scene>
-        <!--Goods List Table View Controller-->
+        <!--VIP专享-->
         <scene sceneID="ppw-vg-kuV">
             <objects>
-                <tableViewController storyboardIdentifier="MMVIPGoodsListTableViewController" autoresizesArchivedViewToFullSize="NO" hidesBottomBarWhenPushed="YES" id="bLS-sp-nDg" customClass="MMVIPGoodsListTableViewController" customModule="shareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MMVIPGoodsListTableViewController" autoresizesArchivedViewToFullSize="NO" hidesBottomBarWhenPushed="YES" id="bLS-sp-nDg" userLabel="VIP专享" customClass="MMVIPGoodsListTableViewController" customModule="shareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="164" sectionHeaderHeight="18" sectionFooterHeight="18" id="Xln-5M-eut">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3977,10 +4011,44 @@
                         </prototypes>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="Sgd-xa-XBY">
+                        <barButtonItem key="leftBarButtonItem" image="back_arrow" id="Lef-qR-kNm">
+                            <connections>
+                                <action selector="back:" destination="rdM-oQ-lxM" id="yL0-aS-Ob1"/>
+                            </connections>
+                        </barButtonItem>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="   请输入商品名称" textAlignment="natural" minimumFontSize="17" id="ott-bz-Wkc" customClass="AnimatableTextField" customModule="IBAnimatable">
+                            <rect key="frame" x="72" y="7" width="231" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="mm_search"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="leftImageLeftPadding">
+                                    <real key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <outlet property="delegate" destination="bLS-sp-nDg" id="ueg-2J-odp"/>
+                            </connections>
+                        </textField>
+                        <barButtonItem key="rightBarButtonItem" image="mm_share1" id="bx4-9x-q3u">
+                            <connections>
+                                <action selector="share:" destination="rdM-oQ-lxM" id="MZF-ac-JgX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="searchTextField" destination="ott-bz-Wkc" id="z0t-S0-oAd"/>
                         <outlet property="tableHeadView" destination="8EJ-CV-jza" id="NsE-Yt-Uxv"/>
                         <segue destination="bjw-Ay-WmV" kind="show" identifier="MMGoodsDetailsViewController" id="1v2-B4-W6X"/>
                         <segue destination="hp2-oV-F68" kind="show" identifier="MMBrandGoodsListTableViewController" id="i1E-iU-1db"/>
+                        <segue destination="0aZ-Eu-R1t" kind="show" identifier="MMSearchGoodsViewController" action="showDetailViewController:sender:" id="7Bl-ud-hlr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MMN-vn-HkF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4115,7 +4183,7 @@
                     </connections>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-6138" y="2060"/>
+            <point key="canvasLocation" x="-5591" y="2175"/>
         </scene>
         <!--Brand Goods List Table View Controller-->
         <scene sceneID="uEw-EM-QNH">
@@ -4391,8 +4459,8 @@
         <scene sceneID="b4F-xF-pVX">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" hidesBottomBarWhenPushed="YES" id="0aZ-Eu-R1t" customClass="MMSearchGoodsViewController" customModule="shareApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" id="XYD-I5-YpX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="XYD-I5-YpX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0ak-1E-zyb" customClass="MMHorizontalFlowLayout" customModule="shareApp" customModuleProvider="target">
@@ -4809,7 +4877,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-2237" y="2818"/>
+            <point key="canvasLocation" x="-359" y="2034"/>
         </scene>
         <!--Shops Set Table View Controller-->
         <scene sceneID="lsY-Zx-PlQ">
@@ -5367,13 +5435,14 @@
         <image name="useHelpMin" width="81" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rn8-Rp-Fto"/>
-        <segue reference="Ea3-Mj-Qaq"/>
+        <segue reference="7Bl-ud-hlr"/>
+        <segue reference="1v2-B4-W6X"/>
+        <segue reference="i1E-iU-1db"/>
         <segue reference="CZs-rl-hAH"/>
         <segue reference="H10-cT-xua"/>
-        <segue reference="kV7-Ra-atw"/>
+        <segue reference="SGZ-Z1-CqS"/>
         <segue reference="hSQ-Tv-lHt"/>
         <segue reference="nly-bp-gTd"/>
-        <segue reference="UdS-CZ-2EU"/>
+        <segue reference="WpH-5N-b5y"/>
     </inferredMetricsTieBreakers>
 </document>

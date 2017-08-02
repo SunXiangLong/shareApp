@@ -93,7 +93,7 @@ class MMPersonalCenterViewController: MMBaseCollectionViewController {
                 }
             }else{
                 self.dismiss()
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
                 
                 self.show("请求失败", delay: 0.7);
                 

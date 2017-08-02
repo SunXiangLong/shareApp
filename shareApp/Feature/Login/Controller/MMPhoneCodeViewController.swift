@@ -25,7 +25,7 @@ class MMPhoneCodeViewController: MMBaseViewController {
         
         HTTPTool.Post(API.validCode, parameters: ["phone":phoneText!,"phone_code":phoneCode.text!]) { (model, error) in
             if model != nil{
-                log("dic=====\(model?.info)")
+                log("dic=====\(String(describing: model?.info))")
                 if  model?.status  == (1){
                     let alertController = UIAlertController.init(title: "提示", message: model?.info, preferredStyle: .alert)
                     alertController.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
@@ -37,7 +37,7 @@ class MMPhoneCodeViewController: MMBaseViewController {
                 }
             }else{
                 
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
                 
             }
         }

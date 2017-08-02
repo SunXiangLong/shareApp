@@ -18,7 +18,7 @@ class searchViewModel: NSObject {
         }
         HTTPTool.Get(API.download, parameters: nil) { (data, error) in
             
-            log(data)
+      
             
             if let data = data{
                 
@@ -34,7 +34,7 @@ class searchViewModel: NSObject {
                 }
                 
             }else{
-                log(error)
+          
             }
             
         }

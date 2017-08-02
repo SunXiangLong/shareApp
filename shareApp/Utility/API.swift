@@ -13,7 +13,7 @@ public struct API {
     /// 线上地址
  fileprivate    static let URL = "https://vapi.xiaomabao.com/"
      /// 测试地址
-// fileprivate static let URL = "http://192.168.11.153/"
+// fileprivate static let URL = "http://192.168.10.230"
 
 /******************************用户搜索商品**************************************/
     //判断是否需要更新推荐搜索关键字
@@ -77,9 +77,13 @@ public struct API {
 //    static let goodsCategoryList2 = API.URL+"goods/category_list_v2"
     ///商品分类
     static let goodsGoodsList = API.URL+"goods/goods_list"
-     static let goodsGoodsList2 = API.URL+"goods/goods_list_v2"
+    static let goodsGoodsList_2 = API.URL+"goods/goods_list2"
+    
+    static let goodsGoodsList2 = API.URL+"goods/goods_list_v2"
+    static let goodsGoodsList2_2 = API.URL+"goods/goods_list_vv2"
     ///商品列表(VIP)
     static let goodsVipGoodsList = API.URL+"goods/vip_goods_list"
+      static let goodsVipGoodsList_2 = API.URL+"goods/vip_goods_list2"
     ///商品列表（我的店铺）
     static let goodsShopGoods = API.URL+"goods/shop_goods"
     ///商品上架
@@ -98,6 +102,8 @@ public struct API {
     static let shopProfitInfo = API.URL+"shop/profit_info"
     ///绑定银行卡
     static let profitBind_card = API.URL+"profit/bind_card"
+    static let profitBind_card_update = API.URL+"profit/bind_card_update"
+  
     ///申请提现
     static let profitApplyWithdraw = API.URL+"profit/apply_withdraw"
     ///提现记录

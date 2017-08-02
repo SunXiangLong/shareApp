@@ -2,6 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 use_frameworks!
 target 'shareApp' do
+#    pod 'GodEye'
     pod 'SwiftyJSON',:git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :tag => 'v3.1.1'
     pod 'SnapKit'   ,:git => 'https://github.com/SnapKit/SnapKit.git', :tag => '3.1.1'
     pod 'Alamofire' ,:git => 'https://github.com/ricebook/Alamofire.git',:branch => 'serious', :commit => '6d2f0a9'
@@ -16,6 +17,7 @@ target 'shareApp' do
     pod 'RxSwift',:git => 'https://github.com/ReactiveX/RxSwift.git', :tag => '3.0.0'
     pod 'RxCocoa',:git => 'https://github.com/ReactiveX/RxSwift.git', :tag => '3.0.0'
     pod 'MJRefresh'
+    
    #  pod "Appirater"
     pod 'MBProgressHUD'
     #标准SDK，含IDFA（友盟统计）

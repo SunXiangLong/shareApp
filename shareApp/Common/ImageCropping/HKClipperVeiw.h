@@ -18,6 +18,6 @@ typedef NS_ENUM (NSUInteger, ClipperType) {
 @property (nonatomic, strong) UIImage *baseImg;
 @property (nonatomic, assign) CGSize resultImgSize;
 @property (nonatomic, assign) ClipperType type;
-
++ (BOOL)bankCardluhmCheck:(NSString *)idCard;
 - (UIImage *)clipImg;
 @end

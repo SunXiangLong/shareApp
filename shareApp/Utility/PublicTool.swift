@@ -178,7 +178,7 @@ public func UUID() ->String{
 //    Appirater.appLaunched(true)
 //}
 
-///友盟统计注册
+    ///友盟统计注册
 public func mobClick() -> Void {
     let  XcodeAppVersion =  Bundle.main.infoDictionary!["CFBundleShortVersionString"]as!String
     let configure = UMAnalyticsConfig()

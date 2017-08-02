@@ -10,11 +10,14 @@ import UIKit
 import MJRefresh
 import IBAnimatable
 import MBProgressHUD
+import SwiftyJSON
 class MMChooseGoodsShelvesTableViewController: MMBaseTableViewController {
     @IBOutlet weak var tableHeadView: UICollectionView!
+    @IBOutlet weak var searchTextField: AnimatableTextField!
     var categoryModel:MMGoodsCategoryModel?
     var cateID = "0"
     lazy var goodsModelArray:[MMGoodsModel] = []
+    var isLevel2Categories = false
     var brandModelArray:[MMBrandModel] = []
     /// 页数
     var page = 1
@@ -24,6 +27,7 @@ class MMChooseGoodsShelvesTableViewController: MMBaseTableViewController {
     var keyword = ""
     
     var type:tableViewCellType?
+    
     var webType:LoadingWebviewType?
     
     lazy var shareView:MMShareView =  {
@@ -36,7 +40,12 @@ class MMChooseGoodsShelvesTableViewController: MMBaseTableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.UI()
+        if isLevel2Categories {
+            self.requestDta()
+        }else{
+            self.UI()
+        }
+       
     }
     
     func UI() -> Void {
@@ -56,16 +65,20 @@ class MMChooseGoodsShelvesTableViewController: MMBaseTableViewController {
             
         }
         self.navigationController?.navigationBar.backgroundColor = Color.white
-        self.tableView.contentInset = UIEdgeInsetsMake(40 , 0, 0, 0)
+        if !isLevel2Categories {
+            self.tableView.contentInset = UIEdgeInsetsMake(40 , 0, 0, 0)
+            self.requestDta()
+        }else{
+            self.tableView.contentInset = UIEdgeInsetsMake(0 , 0, 0, 0)
+        }
+        
         self.tableView.tableFooterView = UIView()
         if categoryModel?.child.count == 0 {
             self.tableHeadView.removeFromSuperview()
             self.tableView.tableHeaderView = UIView()
             self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }
-        
-        self.requestDta()
-        ///   上拉加载
+      
         
         
     }
@@ -125,10 +138,17 @@ class MMChooseGoodsShelvesTableViewController: MMBaseTableViewController {
             
         case .category:
             if let token = MMUserInfo.UserInfo.token {
+                
                 urlStr = API.goodsGoodsList
+                if isLevel2Categories {
+                    urlStr = API.goodsGoodsList_2
+                }
                 parameter = ["token":token,"page":String(page),"cat_id":cateID ,"sort":sort.1 ,"keyword":keyword ]
             }else{
                 urlStr = API.goodsGoodsList2
+                if isLevel2Categories {
+                    urlStr = API.goodsGoodsList2_2
+                }
                 parameter = ["page":String(page),"cat_id":cateID ,"sort":sort.1 ,"keyword":keyword]
                 
             }
@@ -146,7 +166,7 @@ class MMChooseGoodsShelvesTableViewController: MMBaseTableViewController {
                 self.tableView.mj_footer.endRefreshing()
             }
             if model != nil{
-//                log(model?.data)
+                log(model?.data)
                 
                 
                 switch self.type! {
@@ -155,54 +175,38 @@ class MMChooseGoodsShelvesTableViewController: MMBaseTableViewController {
                         MMBrandModel.init(json: $0)
                         })!
                 case .category:
-                    self.goodsModelArray = self.goodsModelArray + (model?.data?.array!.map{
-                        MMGoodsModel.init(json: $0)
-                        })!
+                    if !self.isLevel2Categories {
+                        self.goodsModelArray = self.goodsModelArray + (model?.data?.array!.map{
+                            MMGoodsModel.init(json: $0)
+                            })!
+                    }else{
+                        self.goodsModelArray = self.goodsModelArray + (model?.data?["goods"].array!.map{
+                            MMGoodsModel.init(json: $0)
+                            })!
+                        
+                        self.categoryModel = MMGoodsCategoryModel.init(json:JSON.init(["child":[]]))
+                        self.categoryModel?.child = model?.data?["category"].array!.map{
+                            MMGoodsCategoryChildModel.init(json: $0)
+                        }
+                        self.tableHeadView.reloadData()
+                        self.UI()
+                    }
                     
                 }
+
+                
+                
                 
                 if model?.data?.array?.count == 0{
                     self.tableView.mj_footer.endRefreshingWithNoMoreData()
                     
                 }
                 self.page = self.page + 1
-                self.tableView.reloadData()
+                self.tableView.reloadData();
                 
                 
             }
         }
-        //        HTTPTool.Post(urlStr!, parameters: parameter) { (model, error) in
-        //
-        //            if self.page == 1 {
-        //                self.tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(self.requestDta))
-        //            }else{
-        //                self.tableView.mj_footer.endRefreshing()
-        //            }
-        //            if model != nil{
-        ////               log(model?.data)
-        //
-        //
-        //                switch self.type! {
-        //                case .brand:
-        //                        self.brandModelArray = self.brandModelArray + (model?.data?.array!.map{
-        //                            MMBrandModel.init(json: $0)
-        //                            })!
-        //                case .category:
-        //                    self.goodsModelArray = self.goodsModelArray + (model?.data?.array!.map{
-        //                        MMGoodsModel.init(json: $0)
-        //                        })!
-        //
-        //                }
-        //
-        //                if model?.data?.array?.count == 0{
-        //                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
-        //
-        //                }
-        //                self.page = self.page + 1
-        //                self.tableView.reloadData()
-        //            }
-        //
-        //        }
         
     }
     /**
@@ -249,7 +253,7 @@ class MMChooseGoodsShelvesTableViewController: MMBaseTableViewController {
         case .brand:
             return brandModelArray.count
         case .category:
-            return 1
+            return (categoryModel != nil) ?1:0
         }
     }
     
@@ -341,44 +345,47 @@ class MMChooseGoodsShelvesTableViewController: MMBaseTableViewController {
         
         
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MMGoodsDetailsViewController" {
+        if let identifier = segue.identifier{
             
-            if webType == LoadingWebviewType.eventWebsite {
-                let controller = segue.destination as! MMGoodsDetailsViewController
-                let indexPath = sender as!IndexPath
-                controller.type = LoadingWebviewType.eventWebsite
-                controller.url = brandModelArray[indexPath.section].url
-                controller.brandModel = brandModelArray[indexPath.section]
-                controller.title = brandModelArray[indexPath .section].title
-            }else{
-                let controller = segue.destination as! MMGoodsDetailsViewController
-                let indexPath = sender as!IndexPath
-                let model = goodsModelArray[indexPath.row]
-                controller.type = LoadingWebviewType.goodsDetails
-                controller.url = model.buy_url
+            switch identifier {
+            case "MMGoodsDetailsViewController":
+                if webType == LoadingWebviewType.eventWebsite {
+                    let controller = segue.destination as! MMGoodsDetailsViewController
+                    let indexPath = sender as!IndexPath
+                    controller.type = LoadingWebviewType.eventWebsite
+                    controller.url = brandModelArray[indexPath.section].url
+                    controller.brandModel = brandModelArray[indexPath.section]
+                    controller.title = brandModelArray[indexPath .section].title
+                }else{
+                    let controller = segue.destination as! MMGoodsDetailsViewController
+                    let indexPath = sender as!IndexPath
+                    let model = goodsModelArray[indexPath.row]
+                    controller.type = LoadingWebviewType.goodsDetails
+                    controller.url = model.buy_url
+                    
+                    
+                }
                 
-                
-            }
-            
-        }else if segue.identifier == "MMBrandGoodsListTableViewController"{
-            
+            case "MMSearchGoodsViewController":
+                let vc = segue.destination as!MMSearchGoodsViewController
+                vc.type = .ordinaryGoods
+            case "MMBrandGoodsListTableViewController":
             let controller = segue.destination as! MMBrandGoodsListTableViewController
             let indexPath = sender as! IndexPath
             controller.brandModel = brandModelArray[indexPath.section]
             controller.title = brandModelArray[indexPath .section].title
             controller.type = CommodityType.ordinaryGoods
-            
+            default: break
+                
+            }
         }
-        
-        
     }
-    
+
     // MARK: UICollectionViewDataSource
     func numberOfSectionsInCollectionView(_ collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return (categoryModel != nil) ?1:0
     }
     
     
@@ -416,11 +423,22 @@ class MMChooseGoodsShelvesTableViewController: MMBaseTableViewController {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
     
-        
-        
+       
         let model = categoryModel?.child[indexPath.item]
+        
+        if !self.isLevel2Categories&&model?.show_son == "1"{
+            
+            let vc = UIStoryboard(name: "ShopSeting", bundle: nil).instantiateViewController(withIdentifier: "MMChooseGoodsShelvesTableViewController") as!MMChooseGoodsShelvesTableViewController
+            vc.cateID =  (model?.cat_id)!
+            vc.isLevel2Categories = true;
+            vc.type = tableViewCellType.category
+            self.navigationController?.pushViewController(vc, animated: true);
+            return;
+        }
+        
         cateID = (model?.cat_id)!
         self.sort = ("默认排序","default")
+        self.isLevel2Categories = false;
         self.page = 1
         self.goodsModelArray.removeAll()
         self.keyword = ""
@@ -432,5 +450,18 @@ class MMChooseGoodsShelvesTableViewController: MMBaseTableViewController {
     
     
     
+}
+extension MMChooseGoodsShelvesTableViewController:UITextFieldDelegate{
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool{
+        if self.toLogIn(){
+            self.performSegue(withIdentifier: "MMSearchGoodsViewController", sender: nil)
+        }
+        
+        return false
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        return false
+    }
 }
 

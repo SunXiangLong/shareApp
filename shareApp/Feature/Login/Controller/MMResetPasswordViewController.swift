@@ -50,7 +50,7 @@ class MMResetPasswordViewController: MMBaseViewController {
             
             if model != nil{
                 
-                log("dic=====\(model?.info)")
+                log("dic=====\(String(describing: model?.info))")
                 if model?.status  == (1){
                     
                     let alertController = UIAlertController.init(title: "提示", message: model?.info, preferredStyle: .alert)
@@ -72,7 +72,7 @@ class MMResetPasswordViewController: MMBaseViewController {
                 
             }else{
                 
-                log("erro == \(erro)")
+                log("erro == \(String(describing: erro))")
                 
             }
         }

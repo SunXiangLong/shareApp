@@ -47,6 +47,8 @@ extension UITextView{
 
 extension String{
 
+
+    
     func stringWithSize(_ size:CGSize,font:UIFont) -> CGSize {
         let str = self as NSString
         return str.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName:font], context: nil).size

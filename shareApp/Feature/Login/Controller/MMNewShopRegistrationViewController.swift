@@ -101,7 +101,7 @@ class MMNewShopRegistrationViewController: MMBaseViewController {
             
             if model != nil{
                 
-                log("dic=====\(model?.info)")
+                log("dic=====\(String(describing: model?.info))")
                 if  model?.status  == (1){
                     self.show(model?.info, delay: 1.5);
                     // 启动倒计时
@@ -113,7 +113,7 @@ class MMNewShopRegistrationViewController: MMBaseViewController {
                 
             }else{
                 
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
             }
         }
         
@@ -128,7 +128,7 @@ class MMNewShopRegistrationViewController: MMBaseViewController {
             
             if let model = model{
                 
-                log("dic=====\(model.data)")
+                log("dic=====\(String(describing: model.data))")
                 if model.status == (1){
                     self.show(model.info, delay: 1);
                     self.popViewController(animated: true)
@@ -138,7 +138,7 @@ class MMNewShopRegistrationViewController: MMBaseViewController {
                 
             }else{
                 
-                log("erro == \(erro)")
+                log("erro == \(String(describing: erro))")
                 
             }
         }

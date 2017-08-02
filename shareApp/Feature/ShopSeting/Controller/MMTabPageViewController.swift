@@ -41,29 +41,23 @@ class MMTabPageViewController: TabPageViewController,UIPopoverPresentationContro
     }()
 
     override func viewWillAppear(_ animated: Bool) {
-        
         self.navigationController?.navigationBar.isTranslucent = false
-//        self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.navigationBar.addSubview(keepView)
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         
         keepView.removeFromSuperview()
-//        shareButton.removeFromSuperview()
-//        self.navigationController?.isNavigationBarHidden = false
+
     }
     override func viewDidLoad() {
-//
-        
+
         let backBtn = UIButton.init(type: .custom)
         backBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44);
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: backBtn)
-//        self.navigationController?.navigationBar.backItem?.hidesBackButton  = true
         self.view.backgroundColor = UIColor.white;
-         requestDta(false);
+        
+        requestDta(false);
         
         self.searchTextField.frame = CGRect(x: 60, y: 7, width: screenW - 120, height: 30)
         self.childView = {[unowned self]  (page) in

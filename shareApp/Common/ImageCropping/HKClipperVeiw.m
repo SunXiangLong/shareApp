@@ -290,7 +290,66 @@ static const CGFloat minWidth = 60;
     _resultImgSize = resultImgSize;
     [self clipperView];
 }
-
++ (BOOL)bankCardluhmCheck:(NSString *)idCard{
+    if (!(idCard&&idCard.length > 1)) {
+        
+        return false;
+    }
+    NSString * lastNum = [[idCard substringFromIndex:(idCard.length-1)] copy];//取出最后一位
+    NSString * forwardNum = [[idCard substringToIndex:(idCard.length -1)] copy];//前15或18位
+    
+    NSMutableArray * forwardArr = [[NSMutableArray alloc] initWithCapacity:0];
+    for (int i=0; i<forwardNum.length; i++) {
+        NSString * subStr = [forwardNum substringWithRange:NSMakeRange(i, 1)];
+        [forwardArr addObject:subStr];
+    }
+    
+    NSMutableArray * forwardDescArr = [[NSMutableArray alloc] initWithCapacity:0];
+    for (int i = (int)(forwardArr.count-1); i> -1; i--) {//前15位或者前18位倒序存进数组
+        [forwardDescArr addObject:forwardArr[i]];
+    }
+    
+    NSMutableArray * arrOddNum = [[NSMutableArray alloc] initWithCapacity:0];//奇数位*2的积 < 9
+    NSMutableArray * arrOddNum2 = [[NSMutableArray alloc] initWithCapacity:0];//奇数位*2的积 > 9
+    NSMutableArray * arrEvenNum = [[NSMutableArray alloc] initWithCapacity:0];//偶数位数组
+    
+    for (int i=0; i< forwardDescArr.count; i++) {
+        NSInteger num = [forwardDescArr[i] intValue];
+        if (i%2) {//偶数位
+            [arrEvenNum addObject:[NSNumber numberWithInteger:num]];
+        }else{//奇数位
+            if (num * 2 < 9) {
+                [arrOddNum addObject:[NSNumber numberWithInteger:num * 2]];
+            }else{
+                NSInteger decadeNum = (num * 2) / 10;
+                NSInteger unitNum = (num * 2) % 10;
+                [arrOddNum2 addObject:[NSNumber numberWithInteger:unitNum]];
+                [arrOddNum2 addObject:[NSNumber numberWithInteger:decadeNum]];
+            }
+        }
+    }
+    
+    __block  NSInteger sumOddNumTotal = 0;
+    [arrOddNum enumerateObjectsUsingBlock:^(NSNumber * obj, NSUInteger idx, BOOL *stop) {
+        sumOddNumTotal += [obj integerValue];
+    }];
+    
+    __block NSInteger sumOddNum2Total = 0;
+    [arrOddNum2 enumerateObjectsUsingBlock:^(NSNumber * obj, NSUInteger idx, BOOL *stop) {
+        sumOddNum2Total += [obj integerValue];
+    }];
+    
+    __block NSInteger sumEvenNumTotal =0 ;
+    [arrEvenNum enumerateObjectsUsingBlock:^(NSNumber * obj, NSUInteger idx, BOOL *stop) {
+        sumEvenNumTotal += [obj integerValue];
+    }];
+    
+    NSInteger lastNumber = [lastNum integerValue];
+    
+    NSInteger luhmTotal = lastNumber + sumEvenNumTotal + sumOddNum2Total + sumOddNumTotal;
+    
+    return (luhmTotal%10 ==0)?YES:NO;
+}
 - (UIImageView *)clipperView {
     if (!_clipperView) {
 //        CGFloat width = [UIScreen mainScreen].bounds.size.width;

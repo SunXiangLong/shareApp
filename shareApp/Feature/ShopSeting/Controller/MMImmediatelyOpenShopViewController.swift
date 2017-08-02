@@ -138,7 +138,7 @@ class MMImmediatelyOpenShopViewController: MMBaseViewController {
             
             if model != nil{
                 
-                log("object=====\(model?.data)")
+                log("object=====\(String(describing: model?.data))")
                 if  model?.status  == (1){
                     
                     self.show((model?.info)!+",请等待", delay: 1.5)
@@ -149,7 +149,7 @@ class MMImmediatelyOpenShopViewController: MMBaseViewController {
                 
             }else{
                 
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
                 
             }
         }
@@ -163,7 +163,7 @@ class MMImmediatelyOpenShopViewController: MMBaseViewController {
             
             if model != nil{
                 
-                log("object=====\(model?.data)")
+                log("object=====\(String(describing: model?.data))")
                 if  model?.status  == (1){
                     self.performSegue(withIdentifier: "MMMethodPaymentViewController", sender: model?.data?.dictionaryObject)
                     
@@ -172,7 +172,7 @@ class MMImmediatelyOpenShopViewController: MMBaseViewController {
                 
             }else{
                 
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
                 
             }
         }

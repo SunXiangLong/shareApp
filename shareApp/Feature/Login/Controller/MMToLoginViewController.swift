@@ -52,7 +52,7 @@ class MMToLoginViewController: MMBaseViewController {
         HTTPTool.Post(API.login, parameters: ["username":phoneTextFeld.text!,"password":passwordTextField.text!.md5()]) { (model, error) in
         
             if model != nil{
-                log("dic=====\(model?.data)")
+                log("dic=====\(String(describing: model?.data))")
                 if  model?.status  == (1){
     
                     MMUserInfo.UserInfo.initUserInfo(model)
@@ -65,7 +65,7 @@ class MMToLoginViewController: MMBaseViewController {
            
         }else{
             
-            log("erro == \(error)")
+            log("erro == \(String(describing: error))")
              }
         }
         

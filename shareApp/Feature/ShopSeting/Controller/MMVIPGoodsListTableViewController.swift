@@ -10,14 +10,15 @@ import UIKit
 import MJRefresh
 import IBAnimatable
 import MBProgressHUD
-
+import SwiftyJSON
 class MMVIPGoodsListTableViewController: MMBaseTableViewController {
     
     
     @IBOutlet weak var tableHeadView: UICollectionView!
-    
+    @IBOutlet weak var searchTextField: AnimatableTextField!
     var categoryModel:MMGoodsCategoryModel?
     var cateID = "0"
+    var isLevel2Categories = false
     /// 搜索关键字
     var keyword = ""
     /// 页数
@@ -39,7 +40,12 @@ class MMVIPGoodsListTableViewController: MMBaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.UI()
+        if isLevel2Categories {
+            self.requestDta()
+        }else{
+            self.UI()
+        }
+
         
     }
     
@@ -59,7 +65,13 @@ class MMVIPGoodsListTableViewController: MMBaseTableViewController {
             
         }
         self.navigationController?.navigationBar.backgroundColor = Color.white
-        self.tableView.contentInset = UIEdgeInsetsMake(40 , 0, 0, 0)
+        if !isLevel2Categories {
+            self.tableView.contentInset = UIEdgeInsetsMake(40 , 0, 0, 0)
+            self.requestDta()
+        }else{
+            self.tableView.contentInset = UIEdgeInsetsMake(0 , 0, 0, 0)
+        }
+        
         self.tableView.tableFooterView = UIView()
         if categoryModel?.child.count == 0 {
             self.tableHeadView.removeFromSuperview()
@@ -67,9 +79,7 @@ class MMVIPGoodsListTableViewController: MMBaseTableViewController {
             self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }
         
-        self.requestDta()
-        ///   上拉加载
-//        self.tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(self.requestDta))
+      
         
     }
     
@@ -121,9 +131,12 @@ class MMVIPGoodsListTableViewController: MMBaseTableViewController {
         case .category:
             
             urlStr = API.goodsVipGoodsList
+            if isLevel2Categories {
+                urlStr = API.goodsVipGoodsList_2
+            }
             parameter = ["token":MMUserInfo.UserInfo.token! ,"page":String(page) ,"cat_id":cateID ,"sort":"default" ,"keyword":keyword ]
         }
-            self.show()
+        self.show()
         HTTPTool.PostNoHUD(urlStr!, parameters: parameter) { (model, error) in
             self.dismiss()
             if self.page == 1 {
@@ -140,9 +153,23 @@ class MMVIPGoodsListTableViewController: MMBaseTableViewController {
                         MMBrandModel.init(json: $0)
                         })!
                 case .category:
-                    self.goodsModelArray = self.goodsModelArray + (model?.data?.array!.map{
-                        MMGoodsModel.init(json: $0)
-                        })!
+                    if self.isLevel2Categories{
+                        self.goodsModelArray = self.goodsModelArray + (model?.data?["goods"].array!.map{
+                            MMGoodsModel.init(json: $0)
+                            })!
+                        
+                        self.categoryModel = MMGoodsCategoryModel.init(json:JSON.init(["child":[]]))
+                        self.categoryModel?.child = model?.data?["category"].array!.map{
+                            MMGoodsCategoryChildModel.init(json: $0)
+                        }
+                        self.tableHeadView.reloadData()
+                        self.UI()
+                    }else{
+                        self.goodsModelArray = self.goodsModelArray + (model?.data?.array!.map{
+                            MMGoodsModel.init(json: $0)
+                            })!
+                    }
+                    
                     
                 }
                 if model?.data?.array?.count == 0{
@@ -153,36 +180,7 @@ class MMVIPGoodsListTableViewController: MMBaseTableViewController {
                 self.tableView.reloadData()
             }
         }
-//        HTTPTool.Post(urlStr!, parameters: parameter) { (model, error) in
-//            if self.page == 1 {
-//                self.tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(self.requestDta))
-//            }else{
-//                self.tableView.mj_footer.endRefreshing()
-//            }
-//           
-//            if model != nil{
-//
-//                switch self.type! {
-//                case .brand:
-//                    
-//                    self.brandModelArray = self.brandModelArray + (model?.data?.array!.map{
-//                        MMBrandModel.init(json: $0)
-//                    })!
-//                case .category:
-//                    self.goodsModelArray = self.goodsModelArray + (model?.data?.array!.map{
-//                        MMGoodsModel.init(json: $0)
-//                        })!
-//                    
-//                }
-//                if model?.data?.array?.count == 0{
-//                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
-//                    
-//                }
-//                self.page = self.page + 1
-//                self.tableView.reloadData()
-//            }
-//            
-//        }
+
         
         
     }
@@ -273,36 +271,72 @@ class MMVIPGoodsListTableViewController: MMBaseTableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MMGoodsDetailsViewController" {
-            if webType == LoadingWebviewType.eventWebsite {
-                let controller = segue.destination as! MMGoodsDetailsViewController
-                let indexPath = sender as!IndexPath
-                controller.type = LoadingWebviewType.eventWebsite
-                controller.url = brandModelArray[indexPath.section].url
+        if let identifier = segue.identifier{
+            
+            switch identifier {
+            case "MMGoodsDetailsViewController":
+                if webType == LoadingWebviewType.eventWebsite {
+                    let controller = segue.destination as! MMGoodsDetailsViewController
+                    let indexPath = sender as!IndexPath
+                    controller.type = LoadingWebviewType.eventWebsite
+                    controller.url = brandModelArray[indexPath.section].url
+                    controller.brandModel = brandModelArray[indexPath.section]
+                    controller.title = brandModelArray[indexPath .section].title
+                }else{
+                    let controller = segue.destination as! MMGoodsDetailsViewController
+                    let indexPath = sender as!IndexPath
+                    let model = goodsModelArray[indexPath.row]
+                    controller.type = LoadingWebviewType.goodsDetails
+                    controller.url = model.buy_url
+                    
+                    
+                }
+                
+            case "MMSearchGoodsViewController":
+                let vc = segue.destination as!MMSearchGoodsViewController
+                vc.type = .vipGoods
+            case "MMBrandGoodsListTableViewController":
+                let controller = segue.destination as! MMBrandGoodsListTableViewController
+                let indexPath = sender as! IndexPath
                 controller.brandModel = brandModelArray[indexPath.section]
                 controller.title = brandModelArray[indexPath .section].title
-            }else{
-                let controller = segue.destination as! MMGoodsDetailsViewController
-                let indexPath = sender as!IndexPath
-                let model = goodsModelArray[indexPath.row]
-                controller.type = LoadingWebviewType.goodsDetails
-                controller.url = model.buy_url
-               
+                controller.type = CommodityType.vipGoods
+            default: break
                 
             }
-            
-            
-        }else if segue.identifier == "MMBrandGoodsListTableViewController"{
-            
-            let controller = segue.destination as! MMBrandGoodsListTableViewController
-            let indexPath = sender as! IndexPath
-            controller.brandModel = brandModelArray[indexPath.section]
-            controller.title = brandModelArray[indexPath.section].title
-            controller.type = CommodityType.vipGoods
-            
         }
-        
     }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "MMGoodsDetailsViewController" {
+//            if webType == LoadingWebviewType.eventWebsite {
+//                let controller = segue.destination as! MMGoodsDetailsViewController
+//                let indexPath = sender as!IndexPath
+//                controller.type = LoadingWebviewType.eventWebsite
+//                controller.url = brandModelArray[indexPath.section].url
+//                controller.brandModel = brandModelArray[indexPath.section]
+//                controller.title = brandModelArray[indexPath .section].title
+//            }else{
+//                let controller = segue.destination as! MMGoodsDetailsViewController
+//                let indexPath = sender as!IndexPath
+//                let model = goodsModelArray[indexPath.row]
+//                controller.type = LoadingWebviewType.goodsDetails
+//                controller.url = model.buy_url
+//               
+//                
+//            }
+//            
+//            
+//        }else if segue.identifier == "MMBrandGoodsListTableViewController"{
+//            
+//            let controller = segue.destination as! MMBrandGoodsListTableViewController
+//            let indexPath = sender as! IndexPath
+//            controller.brandModel = brandModelArray[indexPath.section]
+//            controller.title = brandModelArray[indexPath.section].title
+//            controller.type = CommodityType.vipGoods
+//            
+//        }
+//        
+//    }
     
     
     
@@ -348,7 +382,20 @@ extension MMVIPGoodsListTableViewController:UICollectionViewDelegate,UICollectio
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = categoryModel?.child[indexPath.item]
+        
+        
+        
+        if !self.isLevel2Categories&&model?.show_son == "1"{
+            
+            let vc = UIStoryboard(name: "ShopSeting", bundle: nil).instantiateViewController(withIdentifier: "MMChooseGoodsShelvesTableViewController") as!MMChooseGoodsShelvesTableViewController
+            vc.cateID =  (model?.cat_id)!
+            vc.isLevel2Categories = true;
+            vc.type = tableViewCellType.category
+            self.navigationController?.pushViewController(vc, animated: true);
+            return;
+        }
         cateID = (model?.cat_id)!
+        self.isLevel2Categories = true
         self.page = 1
         self.goodsModelArray.removeAll()
         self.tableView.mj_footer.resetNoMoreData()
@@ -358,4 +405,14 @@ extension MMVIPGoodsListTableViewController:UICollectionViewDelegate,UICollectio
     }
 
 
+}
+extension MMVIPGoodsListTableViewController:UITextFieldDelegate{
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool{
+        self.performSegue(withIdentifier: "MMSearchGoodsViewController", sender: nil)
+        return false
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        return false
+    }
 }

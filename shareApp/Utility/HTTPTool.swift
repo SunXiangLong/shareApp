@@ -39,7 +39,7 @@ class HTTPTool {
                     return completion(JSON,nil)
                 case .failure(let error):
                     log(error)
-                    
+                    MBProgressHUD.dismiss()
                     return completion(nil,error)
                     
                 }
@@ -267,7 +267,7 @@ class HTTPTool {
     ///  打印请求的完整链接
     class func logURL(_ url:String?) -> Void{
         
-        log("---->请求的链接url:\(url)")
+        log("---->请求的链接url:\(String(describing: url))")
         
         
     }

@@ -33,7 +33,9 @@ class MMGoodsCategoryModel {
 class MMGoodsCategoryChildModel{
     var cat_id: String!
     var icon: URL!
+    var show_son:String!
     init(json:JSON)  {
+        show_son = json["show_son"].string
         cat_id = json["cat_id"].string
         icon = json["icon"].URL
     }

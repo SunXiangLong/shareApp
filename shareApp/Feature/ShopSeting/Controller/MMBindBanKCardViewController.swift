@@ -20,37 +20,55 @@ class MMBindBanKCardViewController: MMBaseViewController,UITextFieldDelegate{
     @IBOutlet weak var branchBankTextField: AnimatableTextField!
     @IBOutlet weak var cardNoTextField: AnimatableTextField!
     @IBOutlet weak var mobilePhoneTextField: AnimatableTextField!
-//    var isBack = false
+    var isBack = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         heightConstraint.constant = 0.4
         self.title = "绑定银行卡"
         
+        if isBack{
+        
+        self.title = "更换银行卡"
+            
+            
+            
+        }
         
     }
     
     @IBAction func bind(_ sender: AnyObject) {
+        
+       
+        if !HKClipperVeiw.bankCardluhmCheck(cardNoTextField.text!) {
+            self.show("银行卡号输入有误", delay: 0.5)
+            return
+        }
         self.requestDta()
         
     }
     override func requestDta() {
-        
-        HTTPTool.Post(API.profitBind_card, parameters: ["token":MMUserInfo.UserInfo.token!,"real_name":realNameTextField.text!,"province_name":provincesTextField.text!,"city_name":cityTextField.text!,"district_name":countyTextField.text!,"deposit_bank":depositBanktextField.text!,"branch_bank":branchBankTextField.text!,"card_no":cardNoTextField.text!,"mobile_phone":mobilePhoneTextField.text!]) { (model, error) in
+        var url = API.profitBind_card
+        if isBack {
+          url =   API.profitBind_card_update
+        }
+        HTTPTool.Post(url, parameters: ["token":MMUserInfo.UserInfo.token!,"real_name":realNameTextField.text!,"province_name":provincesTextField.text!,"city_name":cityTextField.text!,"district_name":countyTextField.text!,"deposit_bank":depositBanktextField.text!,"branch_bank":branchBankTextField.text!,"card_no":cardNoTextField.text!,"mobile_phone":mobilePhoneTextField.text!]) { (model, error) in
             
             if model != nil{
                 if model?.status == (1){
                     
-                    self.show(model?.info, delay: 1)
-//                    if self.isBack{
-//                        self.popViewController(animated: true);
-//                        return;
-//                    }
                     MMUserInfo.UserInfo.branch_bank = model?.data!["branch_bank"].string
                     MMUserInfo.UserInfo.card_no = model?.data!["card_no"].string
                     MMUserInfo.UserInfo.card_bind_status = true
                     MMUserInfo.UserInfo.real_name = model?.data!["real_name"].string
                     MMUserInfo.UserInfo.deposit_bank = model?.data!["deposit_bank"].string
+                    
+                    if self.isBack{
+                       
+                        self.popViewController(animated: true);
+                        return;
+                    }
+                    
                     self.performSegue(withIdentifier: "MMApplyWithdrawViewController", sender: nil)
                 }
                 

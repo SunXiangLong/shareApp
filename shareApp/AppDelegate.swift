@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,WXApiDelegate{
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+
         ///是否需要更新新版本
         updateInfo()
         ///友盟统计注册
@@ -40,6 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,WXApiDelegate{
         }
         UIApplication.shared.applicationIconBadgeNumber = 0;
 
+        #if DEBUG
+            
+            let overlayClass = NSClassFromString("UIDebuggingInformationOverlay") as? UIWindow.Type
+            _ = overlayClass?.perform(NSSelectorFromString("prepareDebuggingOverlay"))
+            
+        #endif
         return true
         
     }
@@ -79,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,WXApiDelegate{
     //MARK: ----极光推送相关根据token是否过期 判断根视图为登录还是主界面
     func refreshTokenRootVC() -> Void {
         let userinfoDic =   UserDefaults.standard.value(forKey: "userinfo")
-        log(userinfoDic)
+//        log(userinfoDic)
         
         if userinfoDic != nil{
             let json =   JSON.init( userinfoDic as![String:AnyObject])

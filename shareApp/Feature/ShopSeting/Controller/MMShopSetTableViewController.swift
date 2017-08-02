@@ -159,7 +159,7 @@ class MMShopSetTableViewController: MMBaseTableViewController,UIImagePickerContr
                 return
                
             }else{
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
             }
             
             

@@ -103,7 +103,7 @@ class MMPhoneLoginViewController: MMBaseViewController {
 
             if model != nil{
                 
-                  log("object=====\(model?.data)")
+                  log("object=====\(String(describing: model?.data))")
                 if  model?.status  == (1){
                     
                   
@@ -115,7 +115,7 @@ class MMPhoneLoginViewController: MMBaseViewController {
                 
             }else{
                 
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
 
             }
         }
@@ -127,7 +127,7 @@ class MMPhoneLoginViewController: MMBaseViewController {
         HTTPTool.Post(API.login, parameters: ["username":phoneTextField.text!,"password":codeTextField.text!.md5()]) { (model, error) in
             
             if model != nil{
-                log("dic=====\(model?.data)")
+                log("dic=====\(String(describing: model?.data))")
                 if  model?.status  == (1){
                     
                     MMUserInfo.UserInfo.initUserInfo(model)
@@ -143,7 +143,7 @@ class MMPhoneLoginViewController: MMBaseViewController {
                 
             }else{
                 
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
             }
         }
         
@@ -155,7 +155,7 @@ class MMPhoneLoginViewController: MMBaseViewController {
         HTTPTool.Post(API.loginCode, parameters: ["username":phoneTextField.text!,"phone_code":codeTextField.text!]) { (model, error) in
             
             if model != nil{
-              log("dic=====\(model?.info)")
+              log("dic=====\(String(describing: model?.info))")
                  if  model?.status  == (1){
 
                     MMUserInfo.UserInfo.initUserInfo(model)
@@ -168,7 +168,7 @@ class MMPhoneLoginViewController: MMBaseViewController {
                 
             }else{
                 
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
             }
         }
 

@@ -121,7 +121,7 @@ class MMMethodPaymentViewController: MMBaseViewController{
             
             if model != nil{
                 
-                log("object=====\(model?.data)")
+                log("object=====\(String(describing: model?.data))")
                 if  model?.status  == (1){
                     
                     self.performSegue(withIdentifier: "MMPayResultsViewController", sender: model?.data?.dictionaryObject)
@@ -130,7 +130,7 @@ class MMMethodPaymentViewController: MMBaseViewController{
                 
             }else{
                 
-                log("erro == \(error)")
+                log("erro == \(String(describing: error))")
                 
             }
         }

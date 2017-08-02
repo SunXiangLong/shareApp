@@ -16,17 +16,25 @@ class MMApplyWithdrawViewController: MMBaseViewController {
     @IBOutlet weak var realNameLabel: UILabel!
     @IBOutlet weak var backID: UILabel!
     @IBOutlet weak var applyMoneyTextField: UITextField!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "提现"
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         availableBalanceLabel.text = MMUserInfo.UserInfo.available_balance
         realNameLabel.text = MMUserInfo.UserInfo.real_name
         bankLabel.text = MMUserInfo.UserInfo.deposit_bank + MMUserInfo.UserInfo.branch_bank
         backID.text = MMUserInfo.UserInfo.card_no
-       
+        //
+        
+        
     }
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "提现"
+  
+        self.rightStr = "换卡"
+    }
+    override func rightBtnSelector() {
+        self.performSegue(withIdentifier: "MMBindBanKCardViewController", sender: nil)
+    }
     @IBAction func sureToSubmit(_ sender: AnyObject) {
         self.requestDta()
         
@@ -59,7 +67,12 @@ class MMApplyWithdrawViewController: MMBaseViewController {
             let controller = segue.destination as! MMShowResultViewController
             controller.applyMoney = self.applyMoneyTextField.text!
             
-    }
+        }else if segue.identifier == "MMBindBanKCardViewController"{
+            let controller = segue.destination as! MMBindBanKCardViewController
+            controller.isBack = true;
+            
+        
+        }
     }
     /*
     // MARK: - Navigation
